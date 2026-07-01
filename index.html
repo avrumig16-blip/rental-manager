@@ -24,7 +24,7 @@ button{border:0;border-radius:10px;padding:10px 13px;font-weight:bold;cursor:poi
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{padding:10px 13px;border-radius:999px;background:#eef6f9;color:#0b536d;font-weight:bold;cursor:pointer}.tab.on{background:var(--blue);color:white}
 table{width:100%;border-collapse:collapse}th{text-align:left;background:#f3f8fa;color:#53697b;font-size:12px;text-transform:uppercase;padding:12px}td{padding:12px;border-top:1px solid #edf3f6;vertical-align:top}
 label{display:grid;gap:6px;font-size:13px;font-weight:bold;color:#42586a}input,select,textarea{padding:11px;border:1px solid #cfdde4;border-radius:10px;font-size:14px;width:100%}textarea{min-height:80px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.wide{grid-column:1/-1}
-.dropzone{border:2px dashed #9bb9c7;border-radius:12px;padding:16px;background:#f6fbfd;text-align:center;color:#42606f;cursor:pointer}.dropzone.drag{background:#e8f7fb;border-color:#00769a}
+.dropzone{border:2px dashed #9bb9c7;border-radius:12px;padding:16px;background:#f6fbfd;text-align:center;color:#42606f;cursor:pointer}.checkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;border:1px solid #cfdde4;border-radius:10px;padding:10px}.checkgrid label{display:flex;align-items:center;gap:6px;font-weight:normal}.checkgrid input{width:auto}.dropzone.drag{background:#e8f7fb;border-color:#00769a}
 .modalbg{position:fixed;inset:0;background:#001a2388;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modalbg.show{display:flex}.modal{background:white;border-radius:16px;width:min(860px,100%);max-height:90vh;overflow:auto}.mh,.mf{padding:16px;border-bottom:1px solid #dbe8ee;display:flex;justify-content:space-between}.mf{border-top:1px solid #dbe8ee;border-bottom:0;justify-content:flex-end;gap:8px}.mb{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .empty{padding:26px;text-align:center;color:var(--muted)}.activity{line-height:1.7;color:var(--muted)}.bar{height:10px;background:#edf3f6;border-radius:999px;margin:10px 0}.bar div{height:10px;border-radius:999px;background:var(--blue)}
 @media(max-width:900px){.app{display:block}.grid,.row,.mb{grid-template-columns:1fr}.top{height:auto;align-items:flex-start;flex-direction:column;padding:18px}.left{position:static}}
@@ -136,7 +136,7 @@ sb.auth.onAuthStateChange((_event,session)=>{
   if(!session){loginScreen.classList.remove('hidden');}
 });
 
-let db={owners:[],buildings:[],units:[],tenants:[],payments:[],credits:[],documents:[],maintenance:[],utility_ean_codes:[],meter_readings:[],contract_registrations:[],indexations:[],compliance_items:[],bank_transactions:[]};
+let db={owners:[],buildings:[],units:[],tenants:[],payments:[],credits:[],documents:[],maintenance:[],utility_ean_codes:[],meter_readings:[],contract_registrations:[],indexations:[],compliance_items:[],bank_transactions:[],tenant_units:[]};
 let mode='',editId=null,currentBuilding=null,currentUnit=null,currentTab='overview',pendingUpload=null;
 
 function val(id){let el=document.getElementById(id);return el?el.value:''}
@@ -147,7 +147,8 @@ function ownerName(id){let o=db.owners.find(x=>x.id==id);return o?o.name:'No own
 function buildingName(id){let b=db.buildings.find(x=>x.id==id);return b?b.name:'No building'}
 function unitName(id){let u=db.units.find(x=>x.id==id);return u?u.unit_number:'No unit'}
 function tenantName(id){let t=db.tenants.find(x=>x.id==id);return t?t.name:'No tenant'}
-function tenantForUnit(uid){return db.tenants.find(t=>t.unit_id==uid&&t.active!==false)}
+function tenantForUnit(uid){return db.tenants.find(t=>(t.unit_id==uid || (db.tenant_units||[]).some(x=>x.tenant_id==t.id&&x.unit_id==uid))&&t.active!==false)}
+function tenantsForUnit(uid){return db.tenants.filter(t=>(t.unit_id==uid || (db.tenant_units||[]).some(x=>x.tenant_id==t.id&&x.unit_id==uid))&&t.active!==false)}
 function creditsFor(pid){return db.credits.filter(c=>c.payment_id==pid).reduce((s,c)=>s+Number(c.amount||0),0)}
 function outstandingPayment(p){return Math.max(0,Number(p.expected_amount||0)-Number(p.paid_amount||0)-creditsFor(p.id))}
 function totalOutstanding(){return db.payments.reduce((s,p)=>s+outstandingPayment(p),0)}
@@ -196,14 +197,14 @@ function renderActions(){
  recentPortfolio.innerHTML=db.buildings.map(b=>`<div class="ucard" onclick="showBuilding('${b.id}')"><b>${b.name}</b><br><span>${b.address||''}</span><br><small>Owner: ${ownerName(b.owner_id)}</small></div>`).join('')||'<div class="empty">No buildings yet.</div>';
 }
 function renderOwners(){ownersList.innerHTML=db.owners.map(o=>`<div class="item"><div><b>${o.name}</b><br><span>${o.email||''} ${o.phone||''}<br>${o.iban||''}<br>${o.notes||''}</span></div><div><button class="light small" onclick="openModal('owner','${o.id}')">Edit</button> <button class="danger small" onclick="del('owners','${o.id}')">Delete</button></div></div>`).join('')||'<div class="empty">No owners.</div>'}
-function renderTenants(){tenantsList.innerHTML=db.tenants.map(t=>`<div class="item"><div><b>${t.name}</b><br><span>Unit ${unitName(t.unit_id)} · ${eur(tenantRent(t))}<br>${t.phone||''} ${t.email||''}<br>${t.iban||''}</span></div><div><button class="light small" onclick="openModal('tenant','${t.id}')">Edit</button></div></div>`).join('')||'<div class="empty">No tenants.</div>'}
+function renderTenants(){tenantsList.innerHTML=db.tenants.map(t=>`<div class="item"><div><b>${t.name}</b><br><span>Units: ${[t.unit_id,...(db.tenant_units||[]).filter(x=>x.tenant_id==t.id).map(x=>x.unit_id)].filter(Boolean).map(unitName).join(', ')} · ${eur(tenantRent(t))}<br>${t.phone||''} ${t.email||''}<br>${t.iban||''}</span></div><div><button class="light small" onclick="openModal('tenant','${t.id}')">Edit</button></div></div>`).join('')||'<div class="empty">No tenants.</div>'}
 function renderDocuments(){documentsList.innerHTML=db.documents.map(d=>`<div class="item"><div><b>${d.name}</b><br><span>${d.type||''} · ${ownerName(d.owner_id)} · ${buildingName(d.building_id)} · Unit ${unitName(d.unit_id)}<br>${d.file_url?`<a href="${d.file_url}" target="_blank">Open document</a>`:''}<br>${d.note||''}</span></div><div><button class="light small" onclick="openModal('document','${d.id}')">Edit</button> <button class="danger small" onclick="del('documents','${d.id}')">Delete</button></div></div>`).join('')||'<div class="empty">No documents.</div>'}
 function renderReports(){reportsBody.innerHTML=`Buildings: ${db.buildings.length}<br>Units: ${db.units.length}<br>Tenants: ${db.tenants.length}<br>Outstanding: ${eur(totalOutstanding())}`}
 
 function renderBuilding(){
  let b=db.buildings.find(x=>x.id==currentBuilding);if(!b){buildingWorkspace.innerHTML='<div class="empty">No building selected.</div>';return}
  let units=db.units.filter(u=>u.building_id==b.id);
- buildingWorkspace.innerHTML=`<div class="panel"><div class="head"><h3>🏢 ${b.name}</h3><div><button class="light" onclick="openModal('building','${b.id}')">Edit</button> <button class="primary" onclick="openModal('unit')">+ Add Unit</button></div></div><div class="body"><b>Owner:</b> ${ownerName(b.owner_id)}<br><b>Address:</b> ${b.address||''}<br><br><div class="unitgrid">${units.map(u=>{let t=tenantForUnit(u.id);return `<div class="ucard" onclick="showUnit('${u.id}')"><b>${u.unit_number}</b><br>${t?t.name:'Vacant'}<br><span class="pill ${t?'occupied':'vacant'}">${t?'Occupied':'Vacant'}</span></div>`}).join('')||'<div class="empty">No units yet.</div>'}</div></div></div>`;
+ buildingWorkspace.innerHTML=`<div class="panel"><div class="head"><h3>🏢 ${b.name}</h3><div><button class="light" onclick="openModal('building','${b.id}')">Edit</button> <button class="primary" onclick="openModal('unit')">+ Add Unit</button></div></div><div class="body"><b>Owner:</b> ${ownerName(b.owner_id)}<br><b>Address:</b> ${b.address||''}<br><br><div class="unitgrid">${units.map(u=>{let ts=tenantsForUnit(u.id);return `<div class="ucard" onclick="showUnit('${u.id}')"><b>${u.unit_number}</b><br>${ts.length?ts.map(x=>x.name).join(', '):'Vacant'}<br><span class="pill ${ts.length?'occupied':'vacant'}">${ts.length?'Occupied':'Vacant'}</span></div>`}).join('')||'<div class="empty">No units yet.</div>'}</div></div></div>`;
 }
 function renderUnit(){
  let u=db.units.find(x=>x.id==currentUnit);if(!u){unitWorkspace.innerHTML='<div class="empty">No unit selected.</div>';return}
@@ -230,9 +231,23 @@ function renderUnitTab(u,t){
 }
 function renderPayments(list){return list.length?`<table><tr><th>Month</th><th>Expected</th><th>Paid</th><th>Outstanding</th></tr>${list.map(p=>`<tr><td>${p.year}-${String(p.month).padStart(2,'0')}</td><td>${eur(p.expected_amount)}</td><td>${eur(p.paid_amount)}</td><td>${eur(outstandingPayment(p))}</td></tr>`).join('')}</table>`:'No payments.'}
 function renderCredits(t){let paymentIds=(t?db.payments.filter(p=>p.tenant_id==t.id).map(p=>p.id):[]);let list=db.credits.filter(c=>paymentIds.includes(c.payment_id));return list.length?list.map(c=>`<div class="item"><div><b>${c.name}</b><br><span>${eur(c.amount)} · ${c.date||''}<br>${c.note||''}</span></div><div><button class="light small" onclick="openModal('credit','${c.id}')">Edit</button></div></div>`).join(''):'<div class="empty">No credits.</div>'}
+
+async function createStandardUtilities(unitId){
+  let u=db.units.find(x=>x.id==unitId);
+  if(!u){alert('Unit not found');return}
+  let existing=db.utility_ean_codes.filter(e=>e.unit_id==unitId).map(e=>String(e.utility_type||'').toLowerCase());
+  let types=['electricity','gas','water'].filter(t=>!existing.includes(t));
+  if(!types.length){alert('Electricity, gas and water already exist for this unit.');return}
+  let rows=types.map(t=>({building_id:u.building_id,unit_id:Number(unitId),utility_type:t,ean_code:'',meter_number:'',provider:'',notes:''}));
+  let r=await sb.from('utility_ean_codes').insert(rows);
+  if(r.error){alert(r.error.message);return}
+  await loadAll();
+  showUnit(unitId);
+}
+
 function renderUtilities(u){
  let lines=db.utility_ean_codes.filter(e=>e.unit_id==u.id);
- return `<div class="panel"><div class="head"><h3>Utilities & Meter Readings</h3><button class="primary" onclick="openModal('utilityForUnit','${u.id}')">+ Add Utility Line</button></div><div class="body">${lines.length?lines.map(e=>{
+ return `<div class="panel"><div class="head"><h3>Utilities & Meter Readings</h3><button class="greenbtn" onclick="createStandardUtilities('${u.id}')">+ Electricity/Gas/Water</button> <button class="primary" onclick="openModal('utilityForUnit','${u.id}')">+ Add Utility Line</button></div><div class="body">${lines.length?lines.map(e=>{
    let readings=db.meter_readings.filter(r=>r.utility_id==e.id);
    return `<div class="item" style="display:block"><div style="display:flex;justify-content:space-between;gap:10px"><div><b>${e.utility_type||'utility'}</b><br><span>EAN: ${e.ean_code||'--'} · Meter: ${e.meter_number||'--'} · Provider: ${e.provider||'--'}<br>${e.notes||''}</span></div><div><button class="light small" onclick="openModal('utility','${e.id}')">Edit</button> <button class="primary small" onclick="openModal('meterForUtility','${e.id}')">+ Reading</button> <button class="danger small" onclick="del('utility_ean_codes','${e.id}')">×</button></div></div><div style="margin-top:12px">${readings.length?`<table><tr><th>Date</th><th>Reading</th><th>Notes</th></tr>${readings.map(r=>`<tr><td>${r.reading_date||''}</td><td>${r.reading_value||''} ${r.reading_unit||''}</td><td>${r.notes||''}</td></tr>`).join('')}</table>`:'<span>No readings yet.</span>'}</div></div>`;
  }).join(''):'No utility lines yet.'}</div></div>`;
@@ -480,7 +495,7 @@ function openModal(m,id=null){
  if(m=='owner')mb.innerHTML=`<label>Name<input id="name" value="${v.name||''}"></label><label>Email<input id="email" value="${v.email||''}"></label><label>Phone<input id="phone" value="${v.phone||''}"></label><label>IBAN<input id="iban" value="${v.iban||''}"></label><label class="wide">Notes<textarea id="notes">${v.notes||''}</textarea></label>`;
  if(m=='building')mb.innerHTML=`<label>Owner<select id="owner_id"><option value="">No owner</option>${opts(db.owners,v.owner_id,x=>x.name)}</select></label><label>Name<input id="name" value="${v.name||''}"></label><label class="wide">Address<input id="address" value="${v.address||''}"></label>`;
  if(m=='unit')mb.innerHTML=`<label>Building<select id="building_id">${opts(db.buildings,v.building_id||currentBuilding,x=>x.name)}</select></label><label>Unit number<input id="unit_number" value="${v.unit_number||''}"></label><label>Floor<input id="floor" value="${v.floor||''}"></label>`;
- if(m=='tenant')mb.innerHTML=`<label>Unit<select id="unit_id">${opts(db.units,v.unit_id||currentUnit,x=>x.unit_number)}</select></label><label>Name<input id="name" value="${v.name||''}"></label><label>Base rent<input id="base_rent" type="number" value="${v.base_rent??v.rent??''}"></label><label>Additional costs<input id="additional_costs" type="number" value="${v.additional_costs||0}"></label><label>Phone<input id="phone" value="${v.phone||''}"></label><label>Email<input id="email" value="${v.email||''}"></label><label>IBAN<input id="iban" value="${v.iban||''}"></label>`;
+ if(m=='tenant'){let selected=[v.unit_id||currentUnit,...(db.tenant_units||[]).filter(x=>x.tenant_id==v.id).map(x=>x.unit_id)].filter(Boolean).map(String);mb.innerHTML=`<label class="wide">Units rented by this tenant<div class="checkgrid" id="tenantUnits">${db.units.map(u=>`<label><input type="checkbox" value="${u.id}" ${selected.includes(String(u.id))?'checked':''}> ${buildingName(u.building_id)} - ${u.unit_number}</label>`).join('')}</div></label><label>Name<input id="name" value="${v.name||''}"></label><label>Base rent<input id="base_rent" type="number" value="${v.base_rent??v.rent??''}"></label><label>Additional costs<input id="additional_costs" type="number" value="${v.additional_costs||0}"></label><label>Phone<input id="phone" value="${v.phone||''}"></label><label>Email<input id="email" value="${v.email||''}"></label><label>IBAN<input id="iban" value="${v.iban||''}"></label>`;}
  if(m=='payment')mb.innerHTML=`<label>Tenant<select id="tenant_id">${opts(db.tenants,v.tenant_id,x=>x.name)}</select></label><label>Month<input id="payment_month" type="month" value="${v.year?`${v.year}-${String(v.month).padStart(2,'0')}`:''}"></label><label>Expected<input id="expected_amount" type="number" value="${v.expected_amount||''}"></label><label>Paid<input id="paid_amount" type="number" value="${v.paid_amount||0}"></label>`;
  if(m=='credit')mb.innerHTML=`<label>Payment<select id="payment_id">${opts(db.payments,v.payment_id,x=>(x.year||'')+'-'+String(x.month||'').padStart(2,'0')+' '+tenantName(x.tenant_id))}</select></label><label>Amount<input id="amount" type="number" value="${v.amount||''}"></label><label>Name/reason<input id="name" value="${v.name||''}"></label><label>Date<input id="date" type="date" value="${v.date||new Date().toISOString().slice(0,10)}"></label><label class="wide">Note<textarea id="note">${v.note||''}</textarea></label>`;
  if(m=='utilityForUnit'){let u=db.units.find(x=>x.id==id);mb.innerHTML=`<input id="building_id" type="hidden" value="${u?u.building_id:''}"><input id="unit_id" type="hidden" value="${id}"><label>Type<select id="utility_type"><option>electricity</option><option>gas</option><option>water</option><option>other</option></select></label><label>EAN / code<input id="ean_code"></label><label>Meter number<input id="meter_number"></label><label>Provider<input id="provider"></label><label class="wide">Notes<textarea id="notes"></textarea></label>`}
@@ -519,17 +534,20 @@ async function saveModal(){
    floor:val('floor')
  };
 
- if(mode=='tenant')o={
-   unit_id:Number(val('unit_id')),
-   name:val('name'),
-   base_rent:Number(val('base_rent')||0),
-   additional_costs:Number(val('additional_costs')||0),
-   rent:Number(val('base_rent')||0)+Number(val('additional_costs')||0),
-   phone:val('phone'),
-   email:val('email'),
-   iban:val('iban'),
-   active:true
- };
+ if(mode=='tenant'){
+   let checked=[...document.querySelectorAll('#tenantUnits input:checked')].map(x=>Number(x.value));
+   o={
+     unit_id:checked[0]||null,
+     name:val('name'),
+     base_rent:Number(val('base_rent')||0),
+     additional_costs:Number(val('additional_costs')||0),
+     rent:Number(val('base_rent')||0)+Number(val('additional_costs')||0),
+     phone:val('phone'),
+     email:val('email'),
+     iban:val('iban'),
+     active:true
+   };
+ }
 
  if(mode=='payment'){
    let ym=val('payment_month');
@@ -630,8 +648,23 @@ async function saveModal(){
    return;
  }
 
- let r=editId?await sb.from(table).update(o).eq('id',editId):await sb.from(table).insert(o);
- if(r.error)alert(r.error.message);else{closeModal();await loadAll()}
+ let r;
+ if(editId){
+   r=await sb.from(table).update(o).eq('id',editId).select().single();
+ }else{
+   r=await sb.from(table).insert(o).select().single();
+ }
+ if(r.error){alert(r.error.message);return}
+ if(mode=='tenant'){
+   let tenantId=editId||r.data.id;
+   let checked=[...document.querySelectorAll('#tenantUnits input:checked')].map(x=>Number(x.value));
+   await sb.from('tenant_units').delete().eq('tenant_id',tenantId);
+   if(checked.length){
+     let links=checked.map(uid=>({tenant_id:tenantId,unit_id:uid}));
+     await sb.from('tenant_units').insert(links);
+   }
+ }
+ closeModal();await loadAll()
 }
 
 async function del(table,id){if(!confirm('Delete?'))return;let r=await sb.from(table).delete().eq('id',id);if(r.error)alert(r.error.message);else loadAll()}
