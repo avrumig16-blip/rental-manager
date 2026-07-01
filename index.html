@@ -91,7 +91,7 @@ label{display:grid;gap:6px;font-size:13px;font-weight:bold;color:#42586a}input,s
 <div class="panel"><div class="head"><h3>Banking & CSV Import</h3></div><div class="body">
 <div class="row"><label>Bank type<select id="bankType"><option value="auto">Auto detect</option><option value="ing">ING</option><option value="crelan">Crelan</option><option value="wise">Wise</option><option value="kbc">KBC</option><option value="belfius">Belfius</option><option value="bnp">BNP Paribas Fortis</option></select></label><label>CSV file<input id="bankCsvInput" type="file" accept=".csv,.txt" onchange="previewBankCsv()"></label></div>
 <div class="dropzone" id="bankDropzone">Drag bank CSV here or click to choose file</div><br>
-<button class="primary" onclick="importBankCsv()">Import & Match</button> <button class="light" onclick="renderBanking()">Refresh</button>
+<button class="primary" onclick="importBankCsv()">Import & Match</button> <button class="greenbtn" onclick="applyMatchedBankTransactions()">Apply Matched to Payments</button> <button class="light" onclick="renderBanking()">Refresh</button>
 </div></div>
 <div class="grid"><div class="stat"><small>Matched</small><b class="green" id="bankMatched">0</b></div><div class="stat"><small>Unmatched</small><b class="red" id="bankUnmatched">0</b></div><div class="stat"><small>Partial</small><b class="blue" id="bankPartial">0</b></div><div class="stat"><small>Total Imported</small><b class="blue" id="bankTotal">0</b></div></div>
 <div class="panel"><div class="head"><h3>Imported Transactions</h3></div><div id="bankTransactionsList"></div></div>
@@ -207,7 +207,7 @@ function renderBuilding(){
 }
 function renderUnit(){
  let u=db.units.find(x=>x.id==currentUnit);if(!u){unitWorkspace.innerHTML='<div class="empty">No unit selected.</div>';return}
- let t=tenantForUnit(u.id);let tabs=['overview','tenant','rent','payments','credits','utilities','meters','documents','contract','statbel','maintenance','timeline','compliance'];
+ let t=tenantForUnit(u.id);let tabs=['overview','tenant','rent','payments','credits','utilities','documents','contract','statbel','maintenance','timeline','compliance'];
  unitWorkspace.innerHTML=`<div class="panel"><div class="head"><h3>🚪 Unit ${u.unit_number}</h3><div><button class="light" onclick="openModal('unit','${u.id}')">Edit Unit</button> <button class="primary" onclick="openModal('tenant')">+ Tenant</button></div></div><div class="body"><b>${buildingName(u.building_id)}</b><br>${u.floor||''}</div></div><div class="tabs">${tabs.map(x=>`<div class="tab ${currentTab==x?'on':''}" onclick="currentTab='${x}';renderUnit()">${x[0].toUpperCase()+x.slice(1)}</div>`).join('')}</div><div id="unitTabContent"></div>`;
  renderUnitTab(u,t);
 }
@@ -230,7 +230,13 @@ function renderUnitTab(u,t){
 }
 function renderPayments(list){return list.length?`<table><tr><th>Month</th><th>Expected</th><th>Paid</th><th>Outstanding</th></tr>${list.map(p=>`<tr><td>${p.year}-${String(p.month).padStart(2,'0')}</td><td>${eur(p.expected_amount)}</td><td>${eur(p.paid_amount)}</td><td>${eur(outstandingPayment(p))}</td></tr>`).join('')}</table>`:'No payments.'}
 function renderCredits(t){let paymentIds=(t?db.payments.filter(p=>p.tenant_id==t.id).map(p=>p.id):[]);let list=db.credits.filter(c=>paymentIds.includes(c.payment_id));return list.length?list.map(c=>`<div class="item"><div><b>${c.name}</b><br><span>${eur(c.amount)} · ${c.date||''}<br>${c.note||''}</span></div><div><button class="light small" onclick="openModal('credit','${c.id}')">Edit</button></div></div>`).join(''):'<div class="empty">No credits.</div>'}
-function renderUtilities(u){let lines=db.utility_ean_codes.filter(e=>e.unit_id==u.id);return `<div class="panel"><div class="head"><h3>Utilities</h3><button class="primary" onclick="openModal('utilityForUnit','${u.id}')">+ Add Utility Line</button></div><div class="body">${lines.length?`<table><tr><th>Type</th><th>EAN</th><th>Meter</th><th>Provider</th><th></th></tr>${lines.map(e=>`<tr><td>${e.utility_type}</td><td>${e.ean_code||''}</td><td>${e.meter_number||''}</td><td>${e.provider||''}</td><td><button class="light small" onclick="openModal('utility','${e.id}')">Edit</button> <button class="danger small" onclick="del('utility_ean_codes','${e.id}')">×</button></td></tr>`).join('')}</table>`:'No utility lines yet.'}</div></div>`}
+function renderUtilities(u){
+ let lines=db.utility_ean_codes.filter(e=>e.unit_id==u.id);
+ return `<div class="panel"><div class="head"><h3>Utilities & Meter Readings</h3><button class="primary" onclick="openModal('utilityForUnit','${u.id}')">+ Add Utility Line</button></div><div class="body">${lines.length?lines.map(e=>{
+   let readings=db.meter_readings.filter(r=>r.utility_id==e.id);
+   return `<div class="item" style="display:block"><div style="display:flex;justify-content:space-between;gap:10px"><div><b>${e.utility_type||'utility'}</b><br><span>EAN: ${e.ean_code||'--'} · Meter: ${e.meter_number||'--'} · Provider: ${e.provider||'--'}<br>${e.notes||''}</span></div><div><button class="light small" onclick="openModal('utility','${e.id}')">Edit</button> <button class="primary small" onclick="openModal('meterForUtility','${e.id}')">+ Reading</button> <button class="danger small" onclick="del('utility_ean_codes','${e.id}')">×</button></div></div><div style="margin-top:12px">${readings.length?`<table><tr><th>Date</th><th>Reading</th><th>Notes</th></tr>${readings.map(r=>`<tr><td>${r.reading_date||''}</td><td>${r.reading_value||''} ${r.reading_unit||''}</td><td>${r.notes||''}</td></tr>`).join('')}</table>`:'<span>No readings yet.</span>'}</div></div>`;
+ }).join(''):'No utility lines yet.'}</div></div>`;
+}
 function renderMeters(u){let utilities=db.utility_ean_codes.filter(e=>e.unit_id==u.id);let ids=utilities.map(x=>x.id);let readings=db.meter_readings.filter(r=>ids.includes(r.utility_id));return `<div class="panel"><div class="head"><h3>Meter Readings</h3><button class="primary" onclick="openModal('meter')">+ Reading</button></div><div class="body">${readings.length?`<table><tr><th>Date</th><th>Utility</th><th>Reading</th><th>Notes</th></tr>${readings.map(r=>{let utl=db.utility_ean_codes.find(x=>x.id==r.utility_id);return `<tr><td>${r.reading_date||''}</td><td>${utl?utl.utility_type:''}</td><td>${r.reading_value||''} ${r.reading_unit||''}</td><td>${r.notes||''}</td></tr>`}).join('')}</table>`:'No readings yet.'}</div></div>`}
 function renderTimeline(u,t){let ev=[];if(t)db.payments.filter(p=>p.tenant_id==t.id).forEach(p=>ev.push(`${p.year}-${String(p.month).padStart(2,'0')}: rent record ${eur(p.expected_amount)}`));db.documents.filter(d=>d.unit_id==u.id).forEach(d=>ev.push(`Document: ${d.name}`));db.maintenance.filter(m=>m.unit_id==u.id).forEach(m=>ev.push(`Maintenance: ${m.description||m.status}`));return `<div class="panel"><div class="head"><h3>Timeline</h3></div><div class="body activity">${ev.length?ev.join('<br>'):'No history yet.'}</div></div>`}
 function renderCompliance(u){let items=db.compliance_items.filter(i=>i.unit_id==u.id);let done=items.filter(i=>i.status=='done'||i.status=='not needed').length;let pct=items.length?Math.round(done/items.length*100):0;return `<div class="panel"><div class="head"><h3>Compliance ${pct}%</h3><button class="primary" onclick="openModal('compliance')">+ Item</button></div><div class="body"><div class="bar"><div style="width:${pct}%"></div></div>${items.length?items.map(i=>`<div class="item"><div>${i.status=='done'?'✅':i.status=='not needed'?'➖':'❌'} <b>${i.item_type}</b><br><span>${i.due_date||''}<br>${i.notes||''}</span></div><div><button class="light small" onclick="openModal('compliance','${i.id}')">Edit</button></div></div>`).join(''):'No checklist yet.'}</div></div>`}
@@ -406,6 +412,38 @@ async function importBankCsv(){
     alert(`Detected ${data.bank}. Imported ${imported} transactions. Skipped ${skipped}.` + (window.firstBankImportError ? `\n\nFirst error: ${window.firstBankImportError}` : '')); window.firstBankImportError='';
   }catch(e){alert(e.message||String(e))}
 }
+
+async function applyMatchedBankTransactions(){
+  const txs=(db.bank_transactions||[]).filter(t=>(t.status=='matched'||t.status=='partial') && t.matched_tenant_id && !t.applied_to_payment);
+  if(!txs.length){alert('No matched transactions waiting to apply.');return}
+  let created=0,updated=0,failed=0;
+  for(const tx of txs){
+    const d=new Date(tx.transaction_date||new Date());
+    const y=d.getFullYear(), m=d.getMonth()+1;
+    let existing=db.payments.find(p=>p.tenant_id==tx.matched_tenant_id && Number(p.year)==y && Number(p.month)==m);
+    const tenant=db.tenants.find(t=>t.id==tx.matched_tenant_id);
+    const expected=existing?Number(existing.expected_amount||0):tenantRent(tenant||{});
+    if(existing){
+      let paid=Number(existing.paid_amount||0)+Number(tx.amount||0);
+      let status=paid>=expected?'paid':(paid>0?'partial':'pending');
+      let r=await sb.from('payments').update({paid_amount:paid,status}).eq('id',existing.id);
+      if(r.error){console.warn(r.error.message);failed++;continue}
+      updated++;
+    }else{
+      let paid=Number(tx.amount||0);
+      let status=paid>=expected?'paid':(paid>0?'partial':'pending');
+      let obj={tenant_id:tx.matched_tenant_id,payment_month:`${y}-${String(m).padStart(2,'0')}-01`,year:y,month:m,expected_amount:expected,paid_amount:paid,status};
+      let r=await sb.from('payments').insert(obj);
+      if(r.error){console.warn(r.error.message);failed++;continue}
+      created++;
+    }
+    await sb.from('bank_transactions').update({applied_to_payment:true,status:tx.status=='partial'?'partial_applied':'applied'}).eq('id',tx.id);
+  }
+  await loadAll();
+  showPage('bankingPage','Banking');
+  alert(`Applied bank transactions.\nCreated payments: ${created}\nUpdated payments: ${updated}\nFailed: ${failed}`);
+}
+
 function renderBanking(){
   if(!document.getElementById('bankTransactionsList'))return;
   setupBankDrop();
@@ -428,6 +466,7 @@ function openModal(m,id=null){
  if(m=='utilityForUnit'){let u=db.units.find(x=>x.id==id);mb.innerHTML=`<input id="building_id" type="hidden" value="${u?u.building_id:''}"><input id="unit_id" type="hidden" value="${id}"><label>Type<select id="utility_type"><option>electricity</option><option>gas</option><option>water</option><option>other</option></select></label><label>EAN / code<input id="ean_code"></label><label>Meter number<input id="meter_number"></label><label>Provider<input id="provider"></label><label class="wide">Notes<textarea id="notes"></textarea></label>`}
  if(m=='utility')mb.innerHTML=`<label>Unit<select id="unit_id">${opts(db.units,v.unit_id,x=>x.unit_number)}</select></label><label>Type<input id="utility_type" value="${v.utility_type||''}"></label><label>EAN / code<input id="ean_code" value="${v.ean_code||''}"></label><label>Meter number<input id="meter_number" value="${v.meter_number||''}"></label><label>Provider<input id="provider" value="${v.provider||''}"></label><label class="wide">Notes<textarea id="notes">${v.notes||''}</textarea></label>`;
  if(m=='meter')mb.innerHTML=`<label>Utility<select id="utility_id">${opts(db.utility_ean_codes,v.utility_id,x=>(x.utility_type||'')+' '+(x.ean_code||''))}</select></label><label>Date<input id="reading_date" type="date" value="${v.reading_date||new Date().toISOString().slice(0,10)}"></label><label>Reading<input id="reading_value" type="number" value="${v.reading_value||''}"></label><label>Unit<select id="reading_unit"><option>kWh</option><option>m3</option><option>L</option></select></label><label class="wide">Notes<textarea id="notes">${v.notes||''}</textarea></label>`;
+ if(m=='meterForUtility'){let utl=db.utility_ean_codes.find(x=>x.id==id);mb.innerHTML=`<input id="utility_id" type="hidden" value="${id}"><label>Utility<input readonly value="${utl?utl.utility_type+' '+(utl.ean_code||''):''}"></label><label>Date<input id="reading_date" type="date" value="${new Date().toISOString().slice(0,10)}"></label><label>Reading<input id="reading_value" type="number"></label><label>Unit<select id="reading_unit"><option>kWh</option><option>m3</option><option>L</option></select></label><label class="wide">Notes<textarea id="notes"></textarea></label>`;}
  if(m=='document')mb.innerHTML=`<label>Owner<select id="owner_id"><option value="">No owner</option>${opts(db.owners,v.owner_id,x=>x.name)}</select></label><label>Building<select id="building_id"><option value="">No building</option>${opts(db.buildings,v.building_id||currentBuilding,x=>x.name)}</select></label><label>Unit<select id="unit_id"><option value="">No unit</option>${opts(db.units,v.unit_id||currentUnit,x=>x.unit_number)}</select></label><label>Tenant<select id="tenant_id"><option value="">No tenant</option>${opts(db.tenants,v.tenant_id,x=>x.name)}</select></label><label>Type<input id="type_field" value="${v.type||'Document'}"></label><label>Name<input id="name" value="${v.name||''}"></label><label>Existing URL/name<input id="file_url" value="${v.file_url||''}"></label><div class="wide dropzone" id="dropzone">Drag/paste document here or click to upload<br><small id="fileName">${v.file_url||'No file selected'}</small><input id="fileInput" type="file" style="display:none"></div><label class="wide">Note<textarea id="note">${v.note||''}</textarea></label>`;setTimeout(setupDrop,0);
  if(m=='registration')mb.innerHTML=`<label>Tenant<select id="tenant_id">${opts(db.tenants,v.tenant_id,x=>x.name)}</select></label><label>Unit<select id="unit_id">${opts(db.units,v.unit_id||currentUnit,x=>x.unit_number)}</select></label><label>Status<select id="registration_status"><option>not registered</option><option>registered</option></select></label><label>Deadline<input id="deadline" type="date" value="${v.deadline||''}"></label><label>Registration date<input id="registration_date" type="date" value="${v.registration_date||''}"></label><label>Reference<input id="reference_number" value="${v.reference_number||''}"></label><label>Existing proof URL/name<input id="proof_url" value="${v.proof_url||''}"></label><div class="wide dropzone" id="dropzone">Drag/paste proof here or click to upload<br><small id="fileName">${v.proof_url||'No file selected'}</small><input id="fileInput" type="file" style="display:none"></div><label class="wide">Notes<textarea id="notes">${v.notes||''}</textarea></label>`;setTimeout(setupDrop,0);
  if(m=='index')mb.innerHTML=`<label>Tenant<select id="tenant_id">${opts(db.tenants,v.tenant_id,x=>x.name)}</select></label><label>Date<input id="date" type="date" value="${v.date||new Date().toISOString().slice(0,10)}"></label><label>Base<input id="base_rent" type="number" value="${v.base_rent||''}" oninput="calcIndex()"></label><label>Start index<input id="start_index" type="number" value="${v.start_index||''}" oninput="calcIndex()"></label><label>New index<input id="new_index" type="number" value="${v.new_index||''}" oninput="calcIndex()"></label><label>New base<input id="new_base_rent" type="number" value="${v.new_base_rent||''}" readonly></label>`;
@@ -436,7 +475,7 @@ function openModal(m,id=null){
 }
 function calcIndex(){let b=Number(base_rent.value||0),s=Number(start_index.value||0),n=Number(new_index.value||0);new_base_rent.value=(b&&s&&n)?(b*n/s).toFixed(2):''}
 function closeModal(){modalbg.classList.remove('show');mode='';editId=null}
-function tableFor(m){return {owner:'owners',building:'buildings',unit:'units',tenant:'tenants',payment:'payments',credit:'credits',utility:'utility_ean_codes',utilityForUnit:'utility_ean_codes',meter:'meter_readings',document:'documents',registration:'contract_registrations',index:'indexations',maintenance:'maintenance',compliance:'compliance_items'}[m]}
+function tableFor(m){return {owner:'owners',building:'buildings',unit:'units',tenant:'tenants',payment:'payments',credit:'credits',utility:'utility_ean_codes',utilityForUnit:'utility_ean_codes',meter:'meter_readings',meterForUtility:'meter_readings',meterForUtility:'meter_readings',document:'documents',registration:'contract_registrations',index:'indexations',maintenance:'maintenance',compliance:'compliance_items'}[m]}
 async function saveModal(){
  let table=tableFor(mode),o={};
  if(mode=='owner')o={name:val('name'),email:val('email'),phone:val('phone'),iban:val('iban'),notes:val('notes')};
@@ -446,7 +485,7 @@ async function saveModal(){
  if(mode=='payment'){let ym=payment_month.value,y=Number(ym.slice(0,4)),m=Number(ym.slice(5,7));o={tenant_id:Number(tenant_id.value),payment_month:ym+'-01',year:y,month:m,expected_amount:Number(expected_amount.value||0),paid_amount:Number(paid_amount.value||0),status:Number(paid_amount.value)>0?'paid':'pending'}}
  if(mode=='credit')o={payment_id:Number(payment_id.value),amount:Number(amount.value||0),name:name.value,date:date.value||null,note:note.value};
  if(mode=='utility'||mode=='utilityForUnit')o={building_id:building_id?.value?Number(building_id.value):null,unit_id:unit_id.value?Number(unit_id.value):null,utility_type:utility_type.value,ean_code:ean_code.value,meter_number:meter_number.value,provider:provider.value,notes:notes.value};
- if(mode=='meter')o={utility_id:Number(utility_id.value),reading_date:reading_date.value||null,reading_value:Number(reading_value.value||0),reading_unit:reading_unit.value,notes:notes.value};
+ if(mode=='meter'||mode=='meterForUtility')o={utility_id:Number(utility_id.value),reading_date:reading_date.value||null,reading_value:Number(reading_value.value||0),reading_unit:reading_unit.value,notes:notes.value};
  if(mode=='document'){let uploaded=await uploadDocFile();o={owner_id:owner_id.value?Number(owner_id.value):null,building_id:building_id.value?Number(building_id.value):null,unit_id:unit_id.value?Number(unit_id.value):null,tenant_id:tenant_id.value?Number(tenant_id.value):null,type:type_field.value,name:name.value,file_url:uploaded||file_url.value,note:note.value}}
  if(mode=='registration'){let uploaded=await uploadDocFile();o={tenant_id:Number(tenant_id.value),unit_id:Number(unit_id.value),registration_status:registration_status.value,deadline:deadline.value||null,registration_date:registration_date.value||null,reference_number:reference_number.value,proof_url:uploaded||proof_url.value,notes:notes.value}}
  if(mode=='index')o={tenant_id:Number(tenant_id.value),date:date.value||null,base_rent:Number(base_rent.value||0),start_index:Number(start_index.value||0),new_index:Number(new_index.value||0),new_base_rent:Number(new_base_rent.value||0)};
