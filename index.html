@@ -28,9 +28,28 @@ label{display:grid;gap:6px;font-size:13px;font-weight:bold;color:#42586a}input,s
 .modalbg{position:fixed;inset:0;background:#001a2388;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modalbg.show{display:flex}.modal{background:white;border-radius:16px;width:min(860px,100%);max-height:90vh;overflow:auto}.mh,.mf{padding:16px;border-bottom:1px solid #dbe8ee;display:flex;justify-content:space-between}.mf{border-top:1px solid #dbe8ee;border-bottom:0;justify-content:flex-end;gap:8px}.mb{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .empty{padding:26px;text-align:center;color:var(--muted)}.activity{line-height:1.7;color:var(--muted)}.bar{height:10px;background:#edf3f6;border-radius:999px;margin:10px 0}.bar div{height:10px;border-radius:999px;background:var(--blue)}
 @media(max-width:900px){.app{display:block}.grid,.row,.mb{grid-template-columns:1fr}.top{height:auto;align-items:flex-start;flex-direction:column;padding:18px}.left{position:static}}
+
+.login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#071d33,#063e57);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.login-card{background:white;border-radius:18px;box-shadow:0 25px 60px #0005;width:min(420px,100%);padding:28px}
+.login-card h1{margin:0 0 6px}.login-card p{color:#607386;margin:0 0 20px}.login-card label{margin-bottom:12px}
+.login-card input{margin-top:6px}.login-error{color:#b42318;margin-top:12px;font-size:14px}
+.hidden{display:none!important}
+.userbar{display:flex;gap:10px;align-items:center;justify-content:flex-end;color:#607386;font-size:13px}
+
 </style>
 </head>
 <body>
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <h1>🏠 Property Manager Pro</h1>
+    <p>Secure login</p>
+    <label>Email<input id="loginEmail" type="email" autocomplete="email"></label>
+    <label>Password<input id="loginPassword" type="password" autocomplete="current-password"></label>
+    <button class="primary" style="width:100%" onclick="login()">Login</button>
+    <div id="loginError" class="login-error"></div>
+  </div>
+</div>
+
 <div class="app">
 <aside class="left">
   <div class="brand"><div class="logo">🏠</div><div><h1>Property Manager Pro</h1><small>Owner → Building → Unit</small></div></div>
@@ -48,7 +67,7 @@ label{display:grid;gap:6px;font-size:13px;font-weight:bold;color:#42586a}input,s
 </aside>
 <main class="main">
   <div class="top">
-    <div><h2 id="title">Dashboard</h2><small id="status">Connecting...</small></div>
+    <div><h2 id="title">Dashboard</h2><small id="status">Please login</small></div><div class="userbar"><span id="userEmail"></span><button class="light small" onclick="logout()">Logout</button></div>
     <div><button class="primary" onclick="openModal('owner')">+ Owner</button> <button class="light" onclick="openModal('building')">+ Building</button> <button class="light" onclick="openModal('unit')">+ Unit</button></div>
   </div>
   <div class="content">
@@ -86,6 +105,37 @@ label{display:grid;gap:6px;font-size:13px;font-weight:bold;color:#42586a}input,s
 
 <script>
 const sb=window.supabase.createClient('https://yiileradnxvlvkikyuwi.supabase.co','sb_publishable_bCyn05Ht69i9AmFvQhf2IQ_s_MnTsuD');
+
+async function checkSession(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){
+    loginScreen.classList.add('hidden');
+    if(document.getElementById('userEmail')) userEmail.textContent=session.user.email||'Logged in';
+    status.textContent='Connected securely';
+    await loadAll();
+  }else{
+    loginScreen.classList.remove('hidden');
+    if(document.getElementById('userEmail')) userEmail.textContent='';
+    status.textContent='Please login';
+  }
+}
+async function login(){
+  loginError.textContent='';
+  const email=loginEmail.value.trim();
+  const password=loginPassword.value;
+  if(!email||!password){loginError.textContent='Enter email and password.';return}
+  const {error}=await sb.auth.signInWithPassword({email,password});
+  if(error){loginError.textContent=error.message;return}
+  await checkSession();
+}
+async function logout(){
+  await sb.auth.signOut();
+  location.reload();
+}
+sb.auth.onAuthStateChange((_event,session)=>{
+  if(!session){loginScreen.classList.remove('hidden');}
+});
+
 let db={owners:[],buildings:[],units:[],tenants:[],payments:[],credits:[],documents:[],maintenance:[],utility_ean_codes:[],meter_readings:[],contract_registrations:[],indexations:[],compliance_items:[],bank_transactions:[]};
 let mode='',editId=null,currentBuilding=null,currentUnit=null,currentTab='overview',pendingUpload=null;
 
@@ -343,11 +393,15 @@ async function importBankCsv(){
       };
       let r=await sb.from('bank_transactions').insert(obj);
       if(!r.error)imported++;
-      else {console.warn(r.error.message); skipped++;}
+      else {
+        console.warn('Bank insert error:', r.error.message, obj);
+        if(!window.firstBankImportError) window.firstBankImportError = r.error.message;
+        skipped++;
+      }
     }
     await loadAll();
     showPage('bankingPage','Banking');
-    alert(`Detected ${data.bank}. Imported ${imported} transactions. Skipped ${skipped}.`);
+    alert(`Detected ${data.bank}. Imported ${imported} transactions. Skipped ${skipped}.` + (window.firstBankImportError ? `\n\nFirst error: ${window.firstBankImportError}` : '')); window.firstBankImportError='';
   }catch(e){alert(e.message||String(e))}
 }
 function renderBanking(){
@@ -400,7 +454,7 @@ async function saveModal(){
  if(r.error)alert(r.error.message);else{closeModal();await loadAll()}
 }
 async function del(table,id){if(!confirm('Delete?'))return;let r=await sb.from(table).delete().eq('id',id);if(r.error)alert(r.error.message);else loadAll()}
-loadAll();
+checkSession();
 </script>
 </body>
 </html>
