@@ -139,6 +139,8 @@ sb.auth.onAuthStateChange((_event,session)=>{
 let db={owners:[],buildings:[],units:[],tenants:[],payments:[],credits:[],documents:[],maintenance:[],utility_ean_codes:[],meter_readings:[],contract_registrations:[],indexations:[],compliance_items:[],bank_transactions:[]};
 let mode='',editId=null,currentBuilding=null,currentUnit=null,currentTab='overview',pendingUpload=null;
 
+function val(id){let el=document.getElementById(id);return el?el.value:''}
+function num(id){return Number(val(id)||0)}
 function eur(n){return new Intl.NumberFormat('nl-BE',{style:'currency',currency:'EUR'}).format(Number(n||0))}
 function tenantRent(t){return Number(t.base_rent??t.rent??0)+Number(t.additional_costs??0)}
 function ownerName(id){let o=db.owners.find(x=>x.id==id);return o?o.name:'No owner'}
@@ -437,7 +439,7 @@ function closeModal(){modalbg.classList.remove('show');mode='';editId=null}
 function tableFor(m){return {owner:'owners',building:'buildings',unit:'units',tenant:'tenants',payment:'payments',credit:'credits',utility:'utility_ean_codes',utilityForUnit:'utility_ean_codes',meter:'meter_readings',document:'documents',registration:'contract_registrations',index:'indexations',maintenance:'maintenance',compliance:'compliance_items'}[m]}
 async function saveModal(){
  let table=tableFor(mode),o={};
- if(mode=='owner')o={name:name.value,email:email.value,phone:phone.value,iban:iban.value,notes:notes.value};
+ if(mode=='owner')o={name:val('name'),email:val('email'),phone:val('phone'),iban:val('iban'),notes:val('notes')};
  if(mode=='building')o={owner_id:owner_id.value?Number(owner_id.value):null,name:name.value,address:address.value};
  if(mode=='unit')o={building_id:Number(building_id.value),unit_number:unit_number.value,floor:floor.value};
  if(mode=='tenant')o={unit_id:Number(unit_id.value),name:name.value,base_rent:Number(base_rent.value||0),additional_costs:Number(additional_costs.value||0),rent:Number(base_rent.value||0)+Number(additional_costs.value||0),phone:phone.value,email:email.value,iban:iban.value,active:true};
