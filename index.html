@@ -5,7 +5,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Property Manager Pro v2</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="stylesheet" href="./src/styles.css">
+  <style>
+:root{--blue:#00769a;--nav:#071d33;--line:#dfeaf0;--bg:#f4f8fb;--muted:#607386}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#102333}
+.app{display:grid;grid-template-columns:320px 1fr;min-height:100vh}.sidebar{background:linear-gradient(180deg,#071d33,#063e57);color:white;padding:20px;overflow:auto}
+.brand h2{margin:0}.brand small{color:#9ee7f6}.search{width:100%;padding:12px;border-radius:12px;border:1px solid #25586b;background:#0a2b45;color:white;margin:18px 0}
+nav button,.tree-item{width:100%;text-align:left;padding:10px 12px;border:0;border-radius:10px;margin:4px 0;background:transparent;color:#e3f7ff;cursor:pointer}
+nav button:hover,.tree-item:hover{background:#0b5b78}.tree-child{margin-left:16px;border-left:1px solid #28556b;padding-left:8px}
+main{min-width:0}header{height:78px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px}
+#content{padding:26px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 28px #00000008;overflow:hidden}.card{padding:18px}
+.card small{color:var(--muted);font-weight:bold;text-transform:uppercase}.card b{display:block;font-size:28px;margin-top:8px}
+.panel{margin-bottom:18px}.panel-head{padding:16px 18px;border-bottom:1px solid #edf3f6;display:flex;justify-content:space-between;align-items:center}.panel-body{padding:18px}
+button{border:0;border-radius:10px;padding:10px 13px;font-weight:bold;cursor:pointer}.primary{background:var(--blue);color:white}.light{background:#eef7fb;color:#07506b;border:1px solid #cfe4ec}.danger{background:#fee8e6;color:#b42318}
+label{display:grid;gap:6px;font-size:13px;font-weight:bold;color:#42586a}input,select,textarea{padding:11px;border:1px solid #cfdde4;border-radius:10px;font-size:14px;width:100%}
+.list-row,.section-row{padding:16px 18px;border-top:1px solid #edf3f6;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer}.list-row:hover,.section-row:hover{background:#f7fbfd}
+.hidden{display:none!important}.login{position:fixed;inset:0;background:linear-gradient(135deg,#071d33,#063e57);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
+.login-card{background:white;border-radius:18px;box-shadow:0 25px 60px #0005;width:min(420px,100%);padding:28px}.error{color:#b42318;margin-top:12px}
+.modal{position:fixed;inset:0;background:#001a2388;display:flex;align-items:center;justify-content:center;padding:18px;z-index:50}.modal-card{background:white;border-radius:16px;width:min(860px,100%);max-height:90vh;overflow:auto}
+.modal-head,.modal-foot{padding:16px;border-bottom:1px solid #dbe8ee;display:flex;justify-content:space-between}.modal-foot{border-top:1px solid #dbe8ee;border-bottom:0;justify-content:flex-end;gap:8px}.modal-body{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wide{grid-column:1/-1}.checkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;border:1px solid #cfdde4;border-radius:10px;padding:10px}.checkgrid label{display:flex;align-items:center;gap:6px;font-weight:normal}.checkgrid input{width:auto}
+.utility-summary{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-top:1px solid #edf3f6}
+@media(max-width:900px){.app{display:block}.grid,.modal-body{grid-template-columns:1fr}header{height:auto;align-items:flex-start;flex-direction:column;padding:18px}}
+
+</style>
 </head>
 <body>
   <div id="login" class="login">
@@ -64,6 +87,282 @@
     </div>
   </div>
 
-  <script type="module" src="./src/app.js"></script>
+  <script type="module">
+
+
+// ---- supabaseClient.js ----
+const sb = window.supabase.createClient(
+  'https://yiileradnxvlvkikyuwi.supabase.co',
+  'sb_publishable_bCyn05Ht69i9AmFvQhf2IQ_s_MnTsuD'
+);
+
+
+// ---- state.js ----
+const state = {
+  page: 'dashboard',
+  currentOwner: null,
+  currentBuilding: null,
+  currentUnit: null,
+  tables: {
+    owners: [], buildings: [], units: [], tenants: [], tenant_units: [],
+    payments: [], credits: [], documents: [], maintenance: [],
+    utility_ean_codes: [], meter_readings: [], contract_registrations: [],
+    indexations: [], compliance_items: [], bank_transactions: []
+  }
+};
+
+const eur = n => new Intl.NumberFormat('nl-BE',{style:'currency',currency:'EUR'}).format(Number(n||0));
+const val = id => document.getElementById(id)?.value || '';
+const tenantRent = t => Number(t?.base_rent ?? t?.rent ?? 0) + Number(t?.additional_costs ?? 0);
+const byId = (arr,id) => arr.find(x => String(x.id) === String(id));
+
+
+// ---- api.js ----
+
+async function loadAll(){
+  for(const table of Object.keys(state.tables)){
+    const {data,error} = await sb.from(table).select('*');
+    state.tables[table] = error ? [] : (data || []);
+    if(error) console.warn(table, error.message);
+  }
+}
+
+async function upsert(table, payload, id=null){
+  const q = id ? sb.from(table).update(payload).eq('id', id).select().single()
+               : sb.from(table).insert(payload).select().single();
+  const {data,error} = await q;
+  if(error) throw error;
+  return data;
+}
+
+
+// ---- explorer.js ----
+
+function tenantsForUnit(unitId){
+  const links = state.tables.tenant_units.filter(x => String(x.unit_id) === String(unitId)).map(x => String(x.tenant_id));
+  return state.tables.tenants.filter(t => String(t.unit_id) === String(unitId) || links.includes(String(t.id)));
+}
+
+function renderTree(){
+  const q = searchBox.value.toLowerCase();
+  let html = '';
+  for(const owner of state.tables.owners){
+    const buildings = state.tables.buildings.filter(b => String(b.owner_id) === String(owner.id));
+    html += `<div class="tree-item" data-owner="${owner.id}">👤 ${owner.name || 'Owner'}</div><div class="tree-child">`;
+    for(const building of buildings){
+      if(q && !(`${owner.name} ${building.name} ${building.address}`.toLowerCase().includes(q))) continue;
+      html += `<div class="tree-item" data-building="${building.id}">🏢 ${building.name}</div><div class="tree-child">`;
+      for(const unit of state.tables.units.filter(u => String(u.building_id) === String(building.id))){
+        const tenants = tenantsForUnit(unit.id).map(t=>t.name).join(', ');
+        html += `<div class="tree-item" data-unit="${unit.id}">🚪 ${unit.unit_number} ${tenants ? '· '+tenants : ''}</div>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div>`;
+  }
+  portfolioTree.innerHTML = html || '<div class="tree-item">No portfolio yet.</div>';
+  portfolioTree.querySelectorAll('[data-owner]').forEach(x=>x.onclick=()=>{state.currentOwner=x.dataset.owner;state.currentBuilding=state.currentUnit=null;render();});
+  portfolioTree.querySelectorAll('[data-building]').forEach(x=>x.onclick=()=>{state.currentBuilding=x.dataset.building;state.currentUnit=null;render();});
+  portfolioTree.querySelectorAll('[data-unit]').forEach(x=>x.onclick=()=>{state.currentUnit=x.dataset.unit;render();});
+}
+
+
+// ---- dashboard.js ----
+
+function renderDashboard(){
+  pageTitle.textContent = 'Dashboard';
+  const t = state.tables;
+  const outstanding = t.payments.reduce((s,p)=>s + Math.max(0, Number(p.expected_amount||0)-Number(p.paid_amount||0)), 0);
+  const missingUtilities = t.units.filter(u=>!t.utility_ean_codes.some(e=>String(e.unit_id)===String(u.id))).length;
+  content.innerHTML = `
+  <div class="grid">
+    <div class="card"><small>Owners</small><b>${t.owners.length}</b></div>
+    <div class="card"><small>Buildings</small><b>${t.buildings.length}</b></div>
+    <div class="card"><small>Units</small><b>${t.units.length}</b></div>
+    <div class="card"><small>Outstanding</small><b>${eur(outstanding)}</b></div>
+  </div>
+  <div class="panel"><div class="panel-head"><h3>Action required</h3></div>
+  <div class="panel-body">⚠ Outstanding rent: <b>${eur(outstanding)}</b><br>⚠ Units missing utilities: <b>${missingUtilities}</b></div></div>`;
+}
+
+
+// ---- banking.js ----
+function renderBanking(){
+  pageTitle.textContent = 'Banking';
+  content.innerHTML = `<div class="panel"><div class="panel-head"><h3>Banking</h3></div><div class="panel-body">Next module: automatic CSV import → match → update payments, with exceptions only.</div></div>`;
+}
+
+
+// ---- documents.js ----
+function renderDocuments(){
+  pageTitle.textContent = 'Documents';
+  content.innerHTML = `<div class="panel"><div class="panel-head"><h3>Documents</h3></div><div class="panel-body">Drag/drop document center will move here.</div></div>`;
+}
+
+
+// ---- workspace.js ----
+
+function renderOwner(id){
+  const o = byId(state.tables.owners,id);
+  pageTitle.textContent = o?.name || 'Owner';
+  const buildings = state.tables.buildings.filter(b=>String(b.owner_id)===String(id));
+  content.innerHTML = `<div class="panel"><div class="panel-head"><h3>👤 ${o?.name||''}</h3><button class="light" id="editOwner">Edit</button></div><div class="panel-body">${o?.email||''}<br>${o?.phone||''}<br>${o?.iban||''}</div></div><div class="panel"><div class="panel-head"><h3>Buildings</h3></div>${buildings.map(b=>`<div class="list-row" data-building="${b.id}"><b>${b.name}</b><span>${b.address||''}</span></div>`).join('')}</div>`;
+  editOwner.onclick=()=>openModal('owner',id);
+}
+
+function renderBuilding(id){
+  const b = byId(state.tables.buildings,id);
+  pageTitle.textContent = b?.name || 'Building';
+  const units = state.tables.units.filter(u=>String(u.building_id)===String(id));
+  content.innerHTML = `<div class="panel"><div class="panel-head"><h3>🏢 ${b?.name||''}</h3><button class="light" id="editBuilding">Edit</button></div><div class="panel-body">${b?.address||''}</div></div><div class="panel"><div class="panel-head"><h3>Units</h3><button class="primary" id="addUnitHere">+ Unit</button></div>${units.map(u=>{const tenants=tenantsForUnit(u.id).map(t=>t.name).join(', ');return `<div class="list-row" data-unit="${u.id}"><b>Unit ${u.unit_number}</b><span>${tenants || 'Vacant'}</span></div>`}).join('')}</div>`;
+  editBuilding.onclick=()=>openModal('building',id);
+  addUnitHere.onclick=()=>openModal('unit');
+}
+
+function renderUnit(id){
+  const u = byId(state.tables.units,id);
+  pageTitle.textContent = `Unit ${u?.unit_number || ''}`;
+  const sections = [['overview','📋 Overview'],['tenant','👤 Tenant'],['payments','💳 Payments'],['utilities','⚡ Utilities'],['documents','📁 Documents'],['maintenance','🔧 Maintenance'],['timeline','📅 Timeline'],['compliance','✅ Compliance']];
+  content.innerHTML = `<div class="panel"><div class="panel-head"><h3>🚪 Unit ${u?.unit_number||''}</h3><button class="light" id="editUnit">Edit</button></div><div class="panel-body">${u?.floor||''}</div></div><div class="panel">${sections.map(s=>`<div class="section-row" data-section="${s[0]}"><b>${s[1]}</b><span>›</span></div>`).join('')}</div><div id="sectionContent"></div>`;
+  editUnit.onclick=()=>openModal('unit',id);
+  content.querySelectorAll('[data-section]').forEach(x=>x.onclick=()=>renderUnitSection(id,x.dataset.section));
+}
+
+function renderUnitSection(unitId, section){
+  const tenants = tenantsForUnit(unitId);
+  if(section==='tenant'){
+    sectionContent.innerHTML = `<div class="panel"><div class="panel-head"><h3>Tenant</h3><button class="primary" id="addTenant">+ Tenant</button></div>${tenants.map(t=>`<div class="list-row"><b>${t.name}</b><span>${eur(tenantRent(t))}</span></div>`).join('') || '<div class="panel-body">Vacant</div>'}</div>`;
+    addTenant.onclick=()=>openModal('tenant');
+  }
+  if(section==='utilities'){
+    const utilities = state.tables.utility_ean_codes.filter(x=>String(x.unit_id)===String(unitId));
+    sectionContent.innerHTML = `<div class="panel"><div class="panel-head"><h3>Utilities</h3><button class="primary" id="addUtility">+ Utility</button></div><div class="panel-body">${utilities.map(ut=>{const readings=state.tables.meter_readings.filter(r=>String(r.utility_id)===String(ut.id));const last=readings.at(-1);return `<div class="utility-summary"><b>${ut.utility_type}</b><span>${last ? `${last.reading_value} ${last.reading_unit||''}` : 'No reading'} ›</span></div>`}).join('') || 'No utilities yet.'}</div></div>`;
+    addUtility.onclick=()=>openModal('utilityForUnit',unitId);
+  }
+  if(section==='payments'){
+    const tenantIds = tenants.map(t=>String(t.id));
+    const pays = state.tables.payments.filter(p=>tenantIds.includes(String(p.tenant_id)));
+    sectionContent.innerHTML = `<div class="panel"><div class="panel-head"><h3>Payments</h3><button class="primary" id="addPayment">+ Payment</button></div><div class="panel-body">${pays.map(p=>`${p.year}-${String(p.month).padStart(2,'0')} · expected ${eur(p.expected_amount)} · paid ${eur(p.paid_amount)}<br>`).join('') || 'No payments.'}</div></div>`;
+    addPayment.onclick=()=>openModal('payment');
+  }
+}
+
+
+// ---- modal.js ----
+
+let mode = '', editId = null;
+
+function openModal(m, id=null){
+  mode=m; editId=id;
+  modal.classList.remove('hidden');
+  modalTitle.textContent = `${id ? 'Edit' : 'Add'} ${m}`;
+  const table = tableFor(m);
+  const v = id && table ? state.tables[table].find(x=>String(x.id)===String(id)) || {} : {};
+  if(m==='owner') modalBody.innerHTML = `<label>Name<input id="name" value="${v.name||''}"></label><label>Email<input id="email" value="${v.email||''}"></label><label>Phone<input id="phone" value="${v.phone||''}"></label><label>IBAN<input id="iban" value="${v.iban||''}"></label><label class="wide">Notes<textarea id="notes">${v.notes||''}</textarea></label>`;
+  if(m==='building') modalBody.innerHTML = `<label>Owner<select id="owner_id">${options(state.tables.owners,v.owner_id,x=>x.name)}</select></label><label>Name<input id="name" value="${v.name||''}"></label><label class="wide">Address<input id="address" value="${v.address||''}"></label>`;
+  if(m==='unit') modalBody.innerHTML = `<label>Building<select id="building_id">${options(state.tables.buildings,v.building_id || state.currentBuilding,x=>x.name)}</select></label><label>Unit number<input id="unit_number" value="${v.unit_number||''}"></label><label>Floor<input id="floor" value="${v.floor||''}"></label>`;
+  if(m==='tenant'){
+    const selected = [v.unit_id, ...state.tables.tenant_units.filter(x=>String(x.tenant_id)===String(v.id)).map(x=>x.unit_id)].filter(Boolean).map(String);
+    modalBody.innerHTML = `<label class="wide">Units<div class="checkgrid">${state.tables.units.map(u=>`<label><input type="checkbox" class="unitCheck" value="${u.id}" ${selected.includes(String(u.id))?'checked':''}> ${u.unit_number}</label>`).join('')}</div></label><label>Name<input id="name" value="${v.name||''}"></label><label>Base rent<input id="base_rent" type="number" value="${v.base_rent??v.rent??0}"></label><label>Costs<input id="additional_costs" type="number" value="${v.additional_costs||0}"></label><label>Email<input id="email" value="${v.email||''}"></label><label>IBAN<input id="iban" value="${v.iban||''}"></label>`;
+  }
+  if(m==='utilityForUnit') modalBody.innerHTML = `<input type="hidden" id="unit_id" value="${id}"><label>Type<select id="utility_type"><option>electricity</option><option>gas</option><option>water</option><option>internet</option><option>other</option></select></label><label>EAN/code<input id="ean_code"></label><label>Meter number<input id="meter_number"></label><label>Provider<input id="provider"></label><label class="wide">Notes<textarea id="notes"></textarea></label>`;
+  modalClose.onclick = close; modalCancel.onclick = close; modalSave.onclick = save;
+}
+
+function close(){ modal.classList.add('hidden'); }
+function options(arr, selected, label){ return arr.map(x=>`<option value="${x.id}" ${String(x.id)===String(selected)?'selected':''}>${label(x)}</option>`).join(''); }
+function tableFor(m){ return {owner:'owners',building:'buildings',unit:'units',tenant:'tenants',utilityForUnit:'utility_ean_codes'}[m]; }
+
+async function save(){
+  const table = tableFor(mode);
+  let payload = {};
+  if(mode==='owner') payload = {name:val('name'),email:val('email'),phone:val('phone'),iban:val('iban'),notes:val('notes')};
+  if(mode==='building') payload = {owner_id:Number(val('owner_id')),name:val('name'),address:val('address')};
+  if(mode==='unit') payload = {building_id:Number(val('building_id')),unit_number:val('unit_number'),floor:val('floor')};
+  if(mode==='tenant'){
+    const checked = [...document.querySelectorAll('.unitCheck:checked')].map(x=>Number(x.value));
+    payload = {unit_id:checked[0]||null,name:val('name'),base_rent:Number(val('base_rent')||0),additional_costs:Number(val('additional_costs')||0),rent:Number(val('base_rent')||0)+Number(val('additional_costs')||0),email:val('email'),iban:val('iban'),active:true};
+  }
+  if(mode==='utilityForUnit'){
+    const unit = state.tables.units.find(x=>String(x.id)===String(val('unit_id')));
+    payload = {unit_id:Number(val('unit_id')),building_id:unit?.building_id||null,utility_type:val('utility_type'),ean_code:val('ean_code'),meter_number:val('meter_number'),provider:val('provider'),notes:val('notes')};
+  }
+  try{
+    const saved = await upsert(table,payload,editId);
+    if(mode==='tenant'){
+      const id = editId || saved.id;
+      await sb.from('tenant_units').delete().eq('tenant_id',id);
+      const checked = [...document.querySelectorAll('.unitCheck:checked')].map(x=>({tenant_id:id,unit_id:Number(x.value)}));
+      if(checked.length) await sb.from('tenant_units').insert(checked);
+    }
+    close(); await loadAll(); render();
+  }catch(e){ alert(e.message); }
+}
+
+
+// ---- auth.js ----
+
+async function initAuth(){
+  loginBtn.onclick = loginUser;
+  logoutBtn.onclick = logoutUser;
+  const {data:{session}} = await sb.auth.getSession();
+  if(session) await enter(session);
+}
+
+async function loginUser(){
+  loginError.textContent = '';
+  const email = loginEmail.value.trim();
+  const password = loginPassword.value;
+  const {data,error} = await sb.auth.signInWithPassword({email,password});
+  if(error){ loginError.textContent = error.message; return; }
+  await enter(data.session);
+}
+
+async function enter(session){
+  login.classList.add('hidden');
+  userEmail.textContent = session.user.email;
+  await loadAll();
+  render();
+}
+
+async function logoutUser(){
+  await sb.auth.signOut();
+  location.reload();
+}
+
+
+// ---- app.js ----
+
+function render(){
+  renderTree();
+  if(state.currentUnit) return renderUnit(state.currentUnit);
+  if(state.currentBuilding) return renderBuilding(state.currentBuilding);
+  if(state.currentOwner) return renderOwner(state.currentOwner);
+  if(state.page === 'banking') return renderBanking();
+  if(state.page === 'documents') return renderDocuments();
+  if(state.page === 'roles') return renderRoles();
+  return renderDashboard();
+}
+
+function renderRoles(){
+  pageTitle.textContent = 'Users & Roles';
+  content.innerHTML = `<div class="panel"><div class="panel-head"><h3>Users & Roles</h3></div>
+  <div class="panel-body"><b>Admin</b>: everything<br><b>Editor</b>: add/edit data<br><b>Viewer</b>: read only<br><b>Owner</b>: read only, only their portfolio<br><br>Next step: profiles table + role policies.</div></div>`;
+}
+
+document.querySelectorAll('nav button[data-page]').forEach(btn=>{
+  btn.onclick = () => {
+    state.page = btn.dataset.page;
+    state.currentOwner = state.currentBuilding = state.currentUnit = null;
+    render();
+  };
+});
+addOwner.onclick = () => openModal('owner');
+addBuilding.onclick = () => openModal('building');
+addUnit.onclick = () => openModal('unit');
+searchBox.oninput = render;
+initAuth();
+
+</script>
 </body>
 </html>
