@@ -225,7 +225,74 @@ function renderUnit(id){
   const sections = [['overview','📋 Overview'],['tenant','👤 Tenant'],['payments','💳 Payments'],['utilities','⚡ Utilities'],['documents','📁 Documents'],['maintenance','🔧 Maintenance'],['timeline','📅 Timeline'],['compliance','✅ Compliance']];
   content.innerHTML = `<div class="panel"><div class="panel-head"><h3>🚪 Unit ${u?.unit_number||''}</h3><button class="light" id="editUnit">Edit</button></div><div class="panel-body">${u?.floor||''}</div></div><div class="panel">${sections.map(s=>`<div class="section-row" data-section="${s[0]}"><b>${s[1]}</b><span>›</span></div>`).join('')}</div><div id="sectionContent"></div>`;
   editUnit.onclick=()=>openModal('unit',id);
-  content.querySelectorAll('[data-section]').forEach(x=>x.onclick=()=>renderUnitSection(id,x.dataset.section));
+  content.querySelectorAll('[data-section]').forEach(x=>x.onclick=()=>openSectionModal(id,x.dataset.section));
+}
+
+
+function openSectionModal(unitId, section){
+  modal.classList.remove('hidden');
+  const unit = state.tables.units.find(x=>String(x.id)===String(unitId));
+  modalTitle.textContent = `${section.charAt(0).toUpperCase()+section.slice(1)} - Unit ${unit?.unit_number || ''}`;
+  modalSave.classList.add('hidden');
+  modalCancel.textContent = 'Close';
+  modalClose.onclick = closeSectionModal;
+  modalCancel.onclick = closeSectionModal;
+
+  const tenants = tenantsForUnit(unitId);
+
+  if(section==='overview'){
+    modalBody.innerHTML = `<div class="wide"><b>Unit ${unit?.unit_number||''}</b><br>${unit?.floor||''}</div>`;
+  }
+
+  if(section==='tenant'){
+    modalBody.innerHTML = `<div class="wide"><button class="primary" id="popupAddTenant">+ Tenant</button></div>
+    <div class="wide">${tenants.map(t=>`<div class="list-row"><b>${t.name}</b><span>${eur(tenantRent(t))}</span></div>`).join('') || 'Vacant'}</div>`;
+    popupAddTenant.onclick = () => openModal('tenant');
+  }
+
+  if(section==='payments'){
+    const tenantIds = tenants.map(t=>String(t.id));
+    const pays = state.tables.payments.filter(p=>tenantIds.includes(String(p.tenant_id)));
+    modalBody.innerHTML = `<div class="wide"><button class="primary" id="popupAddPayment">+ Payment</button></div>
+    <div class="wide">${pays.map(p=>`<div class="list-row"><b>${p.year}-${String(p.month).padStart(2,'0')}</b><span>Expected ${eur(p.expected_amount)} · Paid ${eur(p.paid_amount)}</span></div>`).join('') || 'No payments.'}</div>`;
+    popupAddPayment.onclick = () => openModal('payment');
+  }
+
+  if(section==='utilities'){
+    const utilities = state.tables.utility_ean_codes.filter(x=>String(x.unit_id)===String(unitId));
+    modalBody.innerHTML = `<div class="wide"><button class="primary" id="popupAddUtility">+ Utility</button></div>
+    <div class="wide">${utilities.map(ut=>{
+      const readings=state.tables.meter_readings.filter(r=>String(r.utility_id)===String(ut.id));
+      const last=readings.at(-1);
+      return `<div class="list-row"><b>${ut.utility_type}</b><span>${last ? `${last.reading_value} ${last.reading_unit||''}` : 'No reading'}</span></div>`;
+    }).join('') || 'No utilities yet.'}</div>`;
+    popupAddUtility.onclick = () => openModal('utilityForUnit', unitId);
+  }
+
+  if(section==='documents'){
+    const docs = state.tables.documents.filter(d=>String(d.unit_id)===String(unitId));
+    modalBody.innerHTML = `<div class="wide">${docs.map(d=>`<div class="list-row"><b>${d.name||'Document'}</b><span>${d.type||''}</span></div>`).join('') || 'No documents.'}</div>`;
+  }
+
+  if(section==='maintenance'){
+    const jobs = state.tables.maintenance.filter(m=>String(m.unit_id)===String(unitId));
+    modalBody.innerHTML = `<div class="wide">${jobs.map(j=>`<div class="list-row"><b>${j.status||'open'}</b><span>${j.description||''}</span></div>`).join('') || 'No maintenance.'}</div>`;
+  }
+
+  if(section==='timeline'){
+    modalBody.innerHTML = `<div class="wide">Timeline will show payments, documents, maintenance and readings in chronological order.</div>`;
+  }
+
+  if(section==='compliance'){
+    const items = state.tables.compliance_items.filter(i=>String(i.unit_id)===String(unitId));
+    modalBody.innerHTML = `<div class="wide">${items.map(i=>`<div class="list-row"><b>${i.item_type}</b><span>${i.status||'missing'}</span></div>`).join('') || 'No compliance items.'}</div>`;
+  }
+}
+
+function closeSectionModal(){
+  modal.classList.add('hidden');
+  modalSave.classList.remove('hidden');
+  modalCancel.textContent = 'Cancel';
 }
 
 function renderUnitSection(unitId, section){
@@ -255,6 +322,8 @@ let mode = '', editId = null;
 function openModal(m, id=null){
   mode=m; editId=id;
   modal.classList.remove('hidden');
+  modalSave.classList.remove('hidden');
+  modalCancel.textContent='Cancel';
   modalTitle.textContent = `${id ? 'Edit' : 'Add'} ${m}`;
   const table = tableFor(m);
   const v = id && table ? state.tables[table].find(x=>String(x.id)===String(id)) || {} : {};
