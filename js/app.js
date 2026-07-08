@@ -1,4 +1,0 @@
-import {initAuth} from './auth.js';import {state} from './state.js';import {renderExplorer} from './explorer.js';import {dashboard,owners,buildings,units,roles,unitPopup} from './views.js';import {openForm} from './modal.js';
-export function renderApp(){renderExplorer();if(state.route==='owners')return owners();if(state.route==='buildings')return buildings();if(state.route==='units')return units();if(state.route==='roles')return roles();if(state.route==='unit'&&state.selected.unit)return unitPopup(state.selected.unit);return dashboard();}
-document.querySelectorAll('[data-route]').forEach(btn=>btn.onclick=()=>{state.route=btn.dataset.route;state.selected={owner:null,building:null,unit:null};renderApp();});
-quickOwner.onclick=()=>openForm('owner');quickBuilding.onclick=()=>openForm('building');quickUnit.onclick=()=>openForm('unit');globalSearch.oninput=renderApp;initAuth();
