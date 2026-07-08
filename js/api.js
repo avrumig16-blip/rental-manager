@@ -1,0 +1,24 @@
+import { sb } from './supabase.js';
+import { state } from './state.js';
+
+export async function loadAll(){
+  for (const table of Object.keys(state.tables)){
+    const { data, error } = await sb.from(table).select('*');
+    state.tables[table] = error ? [] : (data || []);
+    if (error) console.warn(table, error.message);
+  }
+}
+
+export async function saveRow(table, payload, id=null){
+  const request = id
+    ? sb.from(table).update(payload).eq('id', id).select().single()
+    : sb.from(table).insert(payload).select().single();
+  const { data, error } = await request;
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteRow(table, id){
+  const { error } = await sb.from(table).delete().eq('id', id);
+  if (error) throw error;
+}
