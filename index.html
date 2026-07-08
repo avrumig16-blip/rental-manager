@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Property Manager Pro 3.0</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <h1>🏠 Property Manager Pro</h1>
+    <p>Secure login</p>
+    <label>Email<input id="loginEmail" type="email"></label>
+    <label>Password<input id="loginPassword" type="password"></label>
+    <button id="loginBtn" class="primary full">Login</button>
+    <div id="loginError" class="error"></div>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">🏠</div><div><h2>Property Manager Pro</h2><small id="loggedInUser"></small></div></div>
+    <input id="globalSearch" class="search" placeholder="Search owners, buildings, units...">
+    <nav class="main-nav">
+      <button data-route="dashboard">🏠 Dashboard</button>
+      <button data-route="owners">👤 Owners</button>
+      <button data-route="buildings">🏢 Buildings</button>
+      <button data-route="units">🚪 Units</button>
+      <button data-route="payments">💳 Payments</button>
+      <button data-route="roles">🔐 Users & Roles</button>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+    <div class="side-title">Portfolio Explorer</div>
+    <div id="portfolioTree" class="portfolio-tree"></div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><h1 id="pageTitle">Dashboard</h1><small id="pageSubtitle">Portfolio overview</small></div>
+      <div class="actions">
+        <button id="quickOwner" class="primary">+ Owner</button>
+        <button id="quickBuilding" class="light">+ Building</button>
+        <button id="quickUnit" class="light">+ Unit</button>
+        <button id="quickPayment" class="light">+ Payment</button>
+      </div>
+    </header>
+    <section id="appContent" class="content"></section>
+  </main>
+</div>
+
+<div id="modalBackdrop" class="modal-backdrop hidden">
+  <div class="modal-card">
+    <div class="modal-head"><h3 id="modalTitle">Popup</h3><button id="modalClose" class="light">×</button></div>
+    <div id="modalBody" class="modal-body"></div>
+    <div class="modal-foot"><button id="modalCancel" class="light">Cancel</button><button id="modalSave" class="primary">Save</button></div>
+  </div>
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
