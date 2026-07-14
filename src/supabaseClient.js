@@ -1,0 +1,4 @@
+export const sb = window.supabase.createClient(
+  'https://yiileradnxvlvkikyuwi.supabase.co',
+  'sb_publishable_bCyn05Ht69i9AmFvQhf2IQ_s_MnTsuD'
+);
