@@ -1,0 +1,71 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/bank/*.js": {
+      "maxDuration": 30
+    },
+    "api/messages/*.js": {
+      "maxDuration": 30
+    },
+    "api/statbel/*.js": {
+      "maxDuration": 30
+    },
+    "api/system.js": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/bank/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/api/messages/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/api/system",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/messages/run-reminders",
+      "schedule": "0 7 * * *"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/messages/open",
+      "destination": "/api/messages/tracking?mode=open"
+    },
+    {
+      "source": "/api/messages/view",
+      "destination": "/api/messages/tracking?mode=view"
+    },
+    {
+      "source": "/api/messages/copy",
+      "destination": "/api/messages/tracking?mode=copy"
+    },
+    {
+      "source": "/api/messages/inbound",
+      "destination": "/api/messages/webhook"
+    }
+  ]
+}
