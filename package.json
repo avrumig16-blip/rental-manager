@@ -1,0 +1,12 @@
+{
+  "name": "managerent4u-vercel",
+  "version": "10.21.72",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5",
+    "pdf-lib": "^1.17.1"
+  }
+}
