@@ -1,0 +1,36 @@
+{
+  "checked_on": "2026-10-14",
+  "note": "Unmodified blank public forms. Generated copies are prepared for review and signing. Uploading signed copies preserves their original bytes.",
+  "forms": [
+    {
+      "file": "energy-nl.pdf",
+      "source": "https://assets.vlaamsenutsregulator.be/2025-12/energieovernamedocument_1.pdf",
+      "sha256": "505d4b2789a7901ca3cd728bba2e8f477a070325f924073cba259af37c77634d"
+    },
+    {
+      "file": "energy-nl-solar.pdf",
+      "source": "https://assets.vlaamsenutsregulator.be/2025-12/energieovernamedocument_hernieuwbare_energie_1.pdf",
+      "sha256": "b5b3bdc546b9925581958e441732c489adf5780af8953e8ffdc750c8a686fdbc"
+    },
+    {
+      "file": "energy-fr.pdf",
+      "source": "https://www.cwape.be/sites/default/files/cwape-documents/2025.12.11-Document%20de%20reprise%20des%20%C3%A9nergies.pdf",
+      "sha256": "beb37640b15b2ea42cc976db7a27553a5e4d1a717646bb464df1141ee3cd0aa7"
+    },
+    {
+      "file": "energy-fr-solar.pdf",
+      "source": "https://www.cwape.be/sites/default/files/cwape-documents/2025.12.11-Document%20de%20reprise%20des%20%C3%A9nergies-%C3%A9nergies%20renouvelables.pdf",
+      "sha256": "c777ca63f34e1a4e7dbd155b709ef98ef076964cb8db1cc9b0f334b74ac7227e"
+    },
+    {
+      "file": "water-vivaqua.pdf",
+      "source": "https://www.vivaqua.be/content/uploads/2024/03/demenagement-2024-2.pdf",
+      "sha256": "a015488367590df1f24b83bb95ab59ca611de7b9c139e313977d45bb249452a3"
+    },
+    {
+      "file": "water-swde.pdf",
+      "source": "https://www.swde.be/sites/default/files/2024-11/SWDE_Formulaire%20de%20changement%20d%27usager_FR%20%282%29.pdf",
+      "sha256": "7047d3483a5e41fbfc70831b37671e27165710b30e335ca796ff5b24e816cee4"
+    }
+  ]
+}
