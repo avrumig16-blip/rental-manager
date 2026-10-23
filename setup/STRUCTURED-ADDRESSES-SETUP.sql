@@ -1,0 +1,11 @@
+begin;
+alter table public.owners add column if not exists postal_address jsonb;
+alter table public.buildings add column if not exists postal_address jsonb;
+alter table public.tenants add column if not exists postal_address jsonb;
+comment on column public.owners.postal_address is 'Canonical postal address: street, number, box, postal_code, city, country. Null preserves legacy address fallback.';
+comment on column public.buildings.postal_address is 'Canonical property address. Unit box comes from the linked unit.';
+comment on column public.tenants.postal_address is 'Canonical tenant correspondence/billing address; separate from the rented property address.';
+alter table public.tenants add column if not exists lease_region text;
+alter table public.tenants add column if not exists primary_residence boolean;
+notify pgrst, 'reload schema';
+commit;

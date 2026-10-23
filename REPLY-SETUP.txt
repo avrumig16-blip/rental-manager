@@ -1,0 +1,29 @@
+CONNECT EMAIL REPLIES TO THE CONVERSATION
+
+1. In Resend, enable receiving on a dedicated subdomain you control, for example replies.your-domain.com. Add the exact MX and any verification records Resend provides for that subdomain. Keep your usual mailbox domain records intact.
+Official guide: https://resend.com/docs/dashboard/receiving/introduction
+
+2. In Resend, create or update the webhook for:
+https://YOUR-DEPLOYED-WEBSITE/api/messages/webhook
+Enable email.received. Keep email.delivered, email.opened, email.bounced and email.failed enabled if using that same endpoint for delivery tracking. Copy the webhook signing secret.
+
+3. In Vercel project environment variables, set:
+REMINDER_REPLY_DOMAIN=replies.your-domain.com (domain only; no @ or https://)
+RESEND_WEBHOOK_SECRET=the signing secret for this webhook
+RESEND_API_KEY=a Resend key with sending AND receiving API access
+RESEND_FROM_EMAIL=your existing verified sending address
+Keep your existing Supabase and other application variables. Redeploy after changing variables.
+
+4. In ManageRent4U Settings > Messages & letters, save the mailbox you want in Reply-to email. Incoming replies will be forwarded here, while also being saved in the website conversation. Settings shows whether the three incoming configuration variables are present; this does not verify DNS, permissions or webhook delivery.
+
+5. Send a NEW message from the website to an outside mailbox with replies allowed. Reply normally from that mailbox. Open the tenant conversation and click Refresh, or wait up to 20 seconds while it is visible. Verify the incoming card and the forwarded email in your listed mailbox. Use the website Reply button to continue the same conversation.
+
+HOW IT WORKS
+Outgoing emails use a private per-message reply address on your receiving subdomain. Resend delivers a signed webhook; the app retrieves the reply, stores its text and sender/recipient details, and forwards it to your saved mailbox. Retries reuse the saved reply and the provider idempotency key. Quoted text can be expanded in the conversation. Incoming attachment names appear in the chat; attachment files are included in the forwarded email.
+
+SCOPE
+This captures replies to new website messages after setup, including replies from copied recipients using the routed Reply-to address. Previous replies already sent to your mailbox are not imported. Messages sent directly from Gmail or another mailbox are not automatically copied into the website. Reply from the website to keep your sent side in the conversation.
+If configuration is missing, sending keeps the existing direct Reply-to mailbox behavior. Enabling these variables before DNS and webhook setup are complete can route replies to an unready receiving domain; finish steps 1-3 together before sending the test.
+
+TROUBLESHOOTING
+Check Resend webhook delivery logs, receiving-domain verification, Vercel environment selection, signing secret and API-key permissions. Failed processing returns an error so Resend can retry. A forwarding failure leaves the reply saved and retries forwarding. Test from an outside mailbox before relying on live reply capture.
