@@ -1,0 +1,22 @@
+/* Give property photos room to show the whole facade in grid cards. */
+html #root#root .d68-property-grid:not(.list) .d68-property-media {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 3 / 2 !important;
+  flex: 0 0 auto !important;
+  background: #edf2ef !important;
+  overflow: hidden !important;
+}
+html #root#root .d68-property-grid:not(.list) .d68-property-media > img {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
