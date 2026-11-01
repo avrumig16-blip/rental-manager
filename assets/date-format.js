@@ -1,0 +1,5 @@
+(function(root){'use strict';const formats=['DD/MM/YYYY','MM/DD/YYYY','YYYY-MM-DD','DD-MM-YYYY','MM-DD-YYYY','YYYY/MM/DD','DD.MM.YYYY','DD MMM YYYY','MMM DD, YYYY','YYYY MMM DD'];
+function format(value,pattern='DD/MM/YYYY'){if(!value)return '';const raw=String(value),iso=/^\d{4}-\d{2}-\d{2}$/.test(raw)?raw:new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Brussels',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value));const d=new Date(iso+'T12:00:00Z');if(!Number.isFinite(d.getTime()))return raw;const parts={DD:iso.slice(8,10),MM:iso.slice(5,7),YYYY:iso.slice(0,4),MMM:d.toLocaleDateString('en-GB',{month:'short',timeZone:'UTC'})};return (formats.includes(pattern)?pattern:'DD/MM/YYYY').replace(/YYYY|MMM|MM|DD/g,k=>parts[k])}
+function addDays(value,n){const d=new Date(value+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+Number(n));return d.toISOString().slice(0,10)}
+const api={formats,format,addDays};if(typeof module==='object'&&module.exports)module.exports=api;else root.MR4UDates=api;
+})(typeof window!=='undefined'?window:globalThis);
