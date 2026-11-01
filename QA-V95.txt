@@ -1,0 +1,80 @@
+ManageRent4U V10.22.95 — release checks
+Checked 29 October 2026 on the recovered final source.
+
+Validation uses synthetic data and mocked external providers; no live tenant emails, bank actions or production writes.
+
+DB
+PASS migration executes twice
+PASS split, future month, retry no duplicate
+PASS stale allocation and atomic rollback
+PASS correction, concurrent edit, linked account delete guard
+PASS bank match once and unmatch preserving source
+PASS tenant creation and retry with unit link
+PASS charge idempotency
+PASS historical items and retry
+PASS OTP attempt limit and one use
+PASS tenant deletion history guard and empty deletion
+PASS linked contract preparation and reuse
+PASS email change atomically revokes portal links
+PASS private agreement effective due matches statements
+PASS RPC/table permissions
+
+SERVICE
+PASS viewer cannot mutate
+PASS mixed-property tenant blocked
+PASS verified portal only, no private tasks/files/drafts and no-account state
+PASS portal document/task authorization
+PASS portal reply limit
+PASS resend throttle and revocation invalidates existing session
+
+MODEL
+PASS all financial statuses including excess credit
+PASS allocation exact cents and date validation
+PASS recorded due, saved cost snapshot, public charge wording, clean email
+PASS recurring reminder intervals
+
+BROWSER
+PASS profile tab Payments
+PASS profile tab Messages
+PASS profile tab Tasks
+PASS profile tab Documents
+PASS profile tab Contract
+PASS profile tab Utilities
+PASS profile tab Access
+PASS receipt exact allocation, review then record
+PASS component Wizard95
+PASS component Account95
+PASS component Statement95
+PASS component TaskEditor95
+PASS component Compose95
+PASS component Charge95
+PASS component Historical95
+PASS component Upload95
+PASS component Thanks95
+PASS component Schedule95
+PASS component End95
+PASS four-step tenant wizard and reviewed save
+PASS private task review and save
+PASS statement email review and stable interrupted retry
+PASS responsive payments 1920
+PASS responsive payments 1280
+PASS responsive payments 768
+PASS responsive payments 390
+PASS actual statement PDF render
+PASS actual Financials → Rent payments route
+ERRORS []
+
+JavaScript syntax: 56 backend/entry-point/new UI files checked; zero failures.
+Actual statement PDF generated, rendered and text extracted; itemised rent, water and administration retained.
+Browser: actual App tenant directory/profile and Financials → Rent payments routes; eight tenant tabs; four-step reviewed save; exact split/review/record; interrupted statement retry; private task review; form mounts; responsive widths 1920, 1280, 768 and 390.
+Visual inspection: directory, tenant profile, setup, receipt form, account panel, rent workspace and actual PDF.
+Local source includes five API entry points; official handover forms unchanged.
+ZIP validation: CRC verified; update bytes match final source; all four upload batches contain fewer than 100 files; batch union equals complete source without duplicates.
+
+Not exercised against live providers: email deliverability, actual bank authorisation, Supabase Storage transfer, third-party signing and deployed Supabase/Vercel configuration. Those require deployment and configured credentials.
+
+Checked source SHA256:
+e0a1294cad56d18dfbf5ecb44b6534c486c45faf59d5e02f3901679b1d4f7c6a  assets/tenants95.js
+116790ea0632e18650dc52aa725dd3d7ac63a59c3152018bb75777c3e7286669  assets/tenants95.css
+68959847e760bace654fc792b1a50176b2f2e1f38a3ddab9026faeda9fa25f1a  assets/tenant-flow-model95.js
+38152e355baad0b72c6f926bed1d39f3a59de6d7af6a2eff2025e10f33a97240  setup/V10.22.95-TENANTS-PAYMENTS.sql
