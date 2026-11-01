@@ -1,0 +1,33 @@
+/* One shared on/off control. Review/selection checkboxes keep their own styling. */
+html body input[type="checkbox"][role="switch"]{
+ appearance:none!important;-webkit-appearance:none!important;box-sizing:border-box!important;
+ position:relative!important;display:inline-block!important;vertical-align:middle!important;
+ width:42px!important;min-width:42px!important;max-width:42px!important;
+ height:24px!important;min-height:24px!important;max-height:24px!important;
+ flex:0 0 42px!important;padding:0!important;margin:2px 0!important;
+ border:0!important;border-radius:999px!important;background:#8a95a5!important;
+ background-image:none!important;box-shadow:none!important;cursor:pointer!important;
+ transition:background-color .16s ease!important;overflow:visible!important;
+}
+html body input[type="checkbox"][role="switch"]::before{content:none!important}
+html body input[type="checkbox"][role="switch"]::after{
+ content:""!important;position:absolute!important;display:block!important;
+ width:18px!important;height:18px!important;top:3px!important;left:3px!important;
+ border:0!important;border-radius:50%!important;background:#fff!important;
+ box-shadow:0 1px 3px #18223030!important;transform:translateX(0)!important;
+ transition:transform .16s ease!important;
+}
+html body input[type="checkbox"][role="switch"]:checked{background:#1769ee!important}
+html body input[type="checkbox"][role="switch"]:checked::after{transform:translateX(18px)!important}
+html body input[type="checkbox"][role="switch"]:focus-visible{outline:3px solid #93baff!important;outline-offset:3px!important}
+html body input[type="checkbox"][role="switch"]:disabled{opacity:.5!important;cursor:not-allowed!important}
+html body .mr4u-setting-switch{display:inline-flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;justify-content:flex-start!important;min-height:44px!important;margin:0!important;cursor:pointer;width:auto!important}
+.mr4u-setting-switch>span{font-size:13px!important;font-weight:650!important;color:#344054!important;min-width:22px}
+.receipt-mode-controls{display:flex;align-items:center;justify-content:flex-end;gap:16px;flex-wrap:wrap}
+.receipt-mode-controls select{max-width:280px}
+.automatic-report-switch{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.automatic-report-switch small{flex-basis:100%;color:#667085}
+label:has(>input[role="switch"]){column-gap:10px!important;align-items:center}
+@media(max-width:600px){.receipt-mode-controls{justify-content:flex-start;width:100%;gap:8px}.receipt-mode-controls label:has(select),.receipt-mode-controls select{width:100%;max-width:100%}.tenant-receipt-preference{flex-wrap:wrap;gap:12px}}
+@media(prefers-reduced-motion:reduce){html body input[role="switch"],html body input[role="switch"]::after{transition:none!important}}
+@media(forced-colors:active){html body input[type="checkbox"][role="switch"]{background:Canvas!important;border:1px solid ButtonText!important}html body input[type="checkbox"][role="switch"]:checked{background:Highlight!important}html body input[type="checkbox"][role="switch"]::after{background:ButtonText!important}}
