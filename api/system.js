@@ -33,6 +33,8 @@ function randomCode(){return String(crypto.randomInt(0,1000000)).padStart(6,'0')
 async function requestReset(email,kind='reset'){return require('../lib/auth-recovery88').requestReset(email,kind,sendEmail)}
 module.exports=async(req,res)=>{res.setHeader('Access-Control-Allow-Origin','*');res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');res.setHeader('Access-Control-Allow-Headers','Content-Type, Authorization');if(req.method==='OPTIONS')return res.status(204).end();try{
   const body=typeof req.body==='string'?JSON.parse(req.body||'{}'):(req.body||{}),action=String(body.action||req.query.action||'');
+  if(['income_list','income_save','income_delete'].includes(action))return require('../lib/financial-income').route(req,res,{...body,action});
+  if(action==='bank_daily_setup103'){await require('../lib/core').requireBankPermission(req);await require('../lib/owner-followups').ensureWorker();return res.status(200).json({ok:true})}
   if(action.startsWith('tenant95_'))return res.status(200).json(await require('../lib/tenant-workspace95').handle(req,{...body,action}));
   if(action.startsWith('access92_'))return res.status(200).json(await require('../lib/access92').handle(req,{...body,action},{authUsers,authAdmin,requestReset,sendEmail}));
   if(action.startsWith('owners92_'))return res.status(200).json(await require('../lib/owners92').handle(req,{...body,action}));

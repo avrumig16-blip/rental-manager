@@ -1,6 +1,6 @@
 {
   "name": "managerent4u-vercel",
-  "version": "10.22.102",
+  "version": "10.22.107",
   "private": true,
   "engines": {
     "node": ">=20"
