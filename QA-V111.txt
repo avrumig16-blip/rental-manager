@@ -1,0 +1,43 @@
+ManageRent4U V111 — EPC persistence correction
+
+Cause: V95 setup does not define a tenants.epc_label column. The V110 tenant
+wizard included this alias in every save, even when blank; the atomic SQL save
+then tried to write a column that did not exist. The earlier address correction
+did not address this separate field.
+
+Correction:
+- Stop passing epc_label to the tenant SQL save function.
+- Keep EPC grade in the existing __MR4U_CONTRACT metadata in stay_notes, which
+  already stores it. Accept both older top-level EPC inputs and new form metadata.
+- Retain lease dates, indexation preference, private notes, identity/cost metadata.
+- When reopening, prefer saved contract EPC metadata over an old optional column;
+  an explicit blank value clears an earlier grade.
+- Recurring-charge edits preserve existing contract/EPC metadata.
+- Browser save payload excludes the unsupported EPC alias. The backend normalizer
+  remains compatible with the older V110 client. No new API or SQL migration.
+
+Verification (local execution, simulated services):
+PASS all 29 allowed tenant SQL fields fit the existing base fields plus V95 setup.
+PASS reported blank-EPC create with all form fields, postal address and past lease.
+PASS all grades A+, A, B, C, D, E, F, G and blank save without an EPC SQL column.
+PASS new browser metadata payload saves and reopens correctly.
+PASS edit and explicit clear override a stale legacy EPC value on reopening.
+PASS older API inputs without notes preserve existing notes/lease/identity metadata.
+PASS rent-only edits keep EPC and contract dates unchanged.
+PASS lease dates and indexation flag remain in saved metadata.
+PASS legacy address aliases remain in canonical postal_address JSON only.
+PASS invalid grade, including grade in new-client metadata, fails before SQL.
+PASS duplicate create remains idempotent.
+PASS denied workspace/unit access causes no database mutation.
+13 regression checks passed, executing actual backend handler and actual frontend
+metadata serialization/reopening functions against a database mock that rejects
+unsupported columns. The full save-key list is checked, not only the EPC alias.
+
+PASS 119 JavaScript files and 57 inline scripts parse; HTML entrypoints match.
+PASS full ZIP CRC and every archived file matches the application source.
+PASS full upload-pack coverage, exactly two asset batches and under 100 files per
+inner archive. API entrypoint count remains five; existing UI/design is retained.
+
+Production tenant creation has not been exercised from this environment. This
+fix addresses the reported EPC-column error; it does not certify all live banking,
+email/signature flows or exact visual equality of every application state.
