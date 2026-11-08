@@ -1,0 +1,34 @@
+html.design76 body{background:#f5f7f7!important;color:#17212f!important;font:14px/1.6 Arial,sans-serif!important}
+html.design76 .intake-shell{padding:0 24px 35px!important;min-height:100vh!important}
+html.design76 .intake-card{width:min(1300px,100%)!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;display:grid!important;grid-template-columns:minmax(0,1fr) 330px!important;gap:24px!important}
+html.design76 .intake-brand{grid-column:1/-1!important;display:flex!important;align-items:center!important;background:#fff!important;border-bottom:1px solid #e1e5e9!important;margin:0!important;padding:22px 0!important;gap:15px!important}
+html.design76 .intake-logo{font-size:25px!important;font-weight:700!important;width:auto!important;height:auto!important;background:none!important;color:#096b49!important;border-radius:0!important;box-shadow:none!important}
+html.design76 .intake-brand h1{font-size:23px!important;color:#17212f!important;letter-spacing:-.5px!important}.intake-brand p{font-size:12px!important;color:#657080!important}
+html.design76 #notice,html.design76 #loading,html.design76 #success,html.design76 .shortstay-banner{grid-column:1/-1!important}
+html.design76 #tenantForm{background:white!important;border:1px solid #e1e5e9!important;border-radius:6px!important;padding:26px!important;min-width:0!important;align-self:start!important}
+html.design76 .i76-steps{grid-column:1/-1!important;display:flex!important;justify-content:space-between!important;gap:18px!important;margin:8px 0!important;flex-wrap:wrap!important}
+html.design76 .i76-steps button{background:none!important;border:0!important;border-bottom:2px solid transparent!important;color:#657080!important;border-radius:0!important;padding:12px 0!important;box-shadow:none!important;transform:none!important;font-size:13px!important}
+html.design76 .i76-steps button[aria-current=step]{color:#096b49!important;border-bottom-color:#096b49!important;font-weight:700!important}
+html.design76 .i76-summary{background:#fff!important;border:1px solid #e1e5e9!important;border-radius:6px!important;padding:24px!important;min-width:0!important;align-self:start!important}
+html.design76 .i76-summary h3{font-size:18px!important;margin-top:0!important}.i76-summary p,.i76-summary small{font-size:12px!important;color:#657080!important}
+html.design76 .form-grid{gap:18px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html.design76 label{font-size:12px!important;font-weight:500!important;color:#45515e!important}
+html.design76 input,html.design76 select{border:1px solid #d5dde2!important;border-radius:5px!important;background:white!important;color:#17212f!important;padding:10px 12px!important;min-height:40px!important;font-size:14px!important;box-shadow:none!important}
+html.design76 input[type=checkbox]{min-height:16px!important;width:16px!important;height:16px!important;accent-color:#096b49!important}
+html.design76 h2{font-size:21px!important;color:#17212f!important;margin:0 0 14px!important;letter-spacing:-.4px!important}
+html.design76 .i76-address h2:not(:first-child){margin-top:28px!important}html.design76 .i76-address>p{font-size:13px!important;color:#657080!important}
+html.design76 button{background:white!important;color:#096b49!important;border:1px solid #d5dde2!important;border-radius:5px!important;box-shadow:none!important;transform:none!important;font-size:12px!important;padding:10px 14px!important}
+html.design76 button.primary,html.design76 .upload-btn{background:#096b49!important;color:white!important;border-color:#096b49!important}
+html.design76 .form-actions{display:flex!important;align-items:center!important;gap:10px!important;flex-wrap:wrap!important}.form-actions #saveDraftBtn{margin-right:auto!important}
+html.design76 .identity-section{border:0!important;border-radius:0!important;padding:0!important;background:white!important;box-shadow:none!important}
+html.design76 .identity-icon,html.design76 .id-doc-icon{display:none!important}
+html.design76 .id-upload-box{border:1px dashed #b9c8c0!important;border-radius:6px!important;background:#f9fbfa!important;box-shadow:none!important;min-height:235px!important;padding:18px!important}
+html.design76 .id-upload-box h3{font-size:15px!important;color:#17212f!important}html.design76 .id-upload-box p{font-size:11px!important}
+html.design76 .additional-card,html.design76 .additional-panel{border:1px solid #e1e5e9!important;border-radius:6px!important;background:white!important}
+html.design76 .id-preview{border-radius:5px!important}.i76-review dl>div{padding:14px 0;border-bottom:1px solid #e1e5e9;display:grid;grid-template-columns:140px minmax(0,1fr);gap:20px}.i76-review dt{font-size:12px;color:#657080}.i76-review dd{font-size:13px;margin:0;overflow-wrap:anywhere}
+html.design76 .success{border-radius:6px!important;background:#f5fbf6!important;box-shadow:none!important}
+html.design76 [hidden]{display:none!important}
+@media(max-width:950px){html.design76 .intake-card{grid-template-columns:1fr!important}html.design76 .i76-summary{grid-row:auto!important}}
+@media(max-width:600px){html.design76 .intake-shell{padding:0 15px 25px!important}html.design76 #tenantForm{padding:20px!important}html.design76 .form-grid{grid-template-columns:1fr!important}html.design76 .i76-steps{gap:12px!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}html.design76 .i76-steps button{text-align:left!important;font-size:11px!important}html.design76 .id-upload-grid{grid-template-columns:1fr!important}.i76-review dl>div{grid-template-columns:1fr;gap:5px}html.design76 .identity-head{display:block!important}.secure-note{margin-top:10px}html.design76 .additional-card{display:block!important}html.design76 .additional-card .check{margin-top:10px}}
+
+html.design76 .intake-logo:before,html.design76 .intake-logo:after{display:none!important}
