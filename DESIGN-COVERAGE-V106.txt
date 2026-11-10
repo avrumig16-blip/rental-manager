@@ -1,0 +1,143 @@
+ManageRent4U V106 — 68-reference area mapping
+
+The reference set guides layout and shared styling. Screens may retain newer
+functional requirements (all-month arrears, total outstanding and real documents).
+This is a coverage map; it does not certify pixel equality or live provider states.
+See QA-V106.txt for the exact tests performed.
+
+01. Add income and expense forms-5.png
+    Financial overview / transactions
+02. Antwerp property portfolio overview.png
+    Properties / reports
+03. Backup & security settings overview-4.png
+    Settings / automation / users
+04. Banking card actions and account details-1.png
+    Banking and shared receipt allocation
+05. Banking workflow_ remaining states-2.png
+    Banking and shared receipt allocation
+06. Building reports dashboard-2.png
+    Properties / reports
+07. Confirm owner-reported October payment-4.png
+    Owner workspace / portal / report settings
+08. Contract notice review dashboard-2.png
+    Lease notices / indexation
+09. Create invoice for Daniel Vermeer-3.png
+    Invoices / recurring billing
+10. Emma Peeters tenant profile with open actions menu-4.png
+    Tenant workspace / payments / statements / messages
+11. Financial transaction drawer and actions menu-2.png
+    Financial overview / transactions
+12. Financials final actions storyboard-3.png
+    Financial overview / transactions
+13. Incoming payment allocation review-4.png
+    Banking and shared receipt allocation
+14. Invoice creation and recurring billing flow-2.png
+    Invoices / recurring billing
+15. Invoices and recurring payments dashboard-1.png
+    Invoices / recurring billing
+16. Invoicing review, sending, and payment tracking-3.png
+    Invoices / recurring billing
+17. Lease contract review workspace-2.png
+    Contracts / real-document signing
+18. Lease signing preparation workspace-3.png
+    Contracts / real-document signing
+19. ManageRent4U Automation Rules Dashboard-3.png
+    Settings / automation / users
+20. ManageRent4U Financial Overview Dashboard-2.png
+    Financial overview / transactions
+21. ManageRent4U October Rent Update Email-1.png
+    Owner workspace / portal / report settings
+22. ManageRent4U October Statement Email Preview-1.png
+    Tenant workspace / payments / statements / messages
+23. ManageRent4U Tenant Payments Ledger-1.png
+    Tenant workspace / payments / statements / messages
+24. ManageRent4U account access screens-7.png
+    Sign-in / recovery / workspace selection
+25. ManageRent4U connected banking dashboard-2.png
+    Banking and shared receipt allocation
+26. ManageRent4U contracts dashboard-1.png
+    Contracts directory
+27. ManageRent4U document management dashboard-4.png
+    Document workspace
+28. ManageRent4U financial transactions workspace-1.png
+    Financial overview / transactions
+29. ManageRent4U global search flow-1 (1).png
+    Global search
+30. ManageRent4U global search flow-1.png
+    Global search
+31. ManageRent4U help and support flow.png
+    Help and support
+32. ManageRent4U maintenance dashboard-1.png
+    Maintenance / shared tasks
+33. ManageRent4U notification center flow-2.png
+    Notification centre
+34. ManageRent4U notification flow board-2.png
+    Notification centre
+35. ManageRent4U owner conversation workspace.png
+    Owner workspace / portal / report settings
+36. ManageRent4U owners workspace dashboard (1).png
+    Owner workspace / portal / report settings
+37. ManageRent4U owners workspace dashboard.png
+    Owner workspace / portal / report settings
+38. ManageRent4U payment confirmation email preview-2.png
+    Tenant workspace / payments / statements / messages
+39. ManageRent4U property messages dashboard.png
+    Property conversations
+40. ManageRent4U statement email composer-3.png
+    Tenant workspace / payments / statements / messages
+41. ManageRent4U task management dashboard-1.png
+    Task workspace
+42. ManageRent4U users and access settings-5.png
+    Settings / automation / users
+43. ManageRent4U workspace settings-5.png
+    Settings / automation / users
+44. Manual rent payment modal-2.png
+    Tenant workspace / payments / statements / messages
+45. Match incoming payment-4.png
+    Banking and shared receipt allocation
+46. New repair and owner approval screens.png
+    Owner workspace / portal / report settings
+47. October Monthly Rent Account Details-2.png
+    Tenant workspace / payments / statements / messages
+48. October Rent Status Review-2.png
+    Owner workspace / portal / report settings
+49. October rent payment recorded-3.png
+    Tenant workspace / payments / statements / messages
+50. October rent reminder email preview-3.png
+    Tenant workspace / payments / statements / messages
+51. October rent-status report send modal-8.png
+    Owner workspace / portal / report settings
+52. Owner messages workspace with rent overview-3.png
+    Owner workspace / portal / report settings
+53. Owner workspace with shared tasks-2.png
+    Owner workspace / portal / report settings
+54. Pending rent indexation review-3.png
+    Lease notices / indexation
+55. Property invoicing workspace and detail view-1.png
+    Invoices / recurring billing
+56. Property portfolio overview dashboard.png
+    Properties / reports
+57. Recurring invoice template editor-6.png
+    Invoices / recurring billing
+58. Secure lease signing workspace-1.png
+    Contracts / real-document signing
+59. Send statement modal for Emma Peeters-3.png
+    Tenant workspace / payments / statements / messages
+60. Tenant application_ address and household-1.png
+    Public tenant intake
+61. Tenant directory and payment status.png
+    Tenant workspace / payments / statements / messages
+62. Tenant move-in utility setup-1.png
+    Properties and tenant utilities / handovers
+63. Tenant payments overview for Emma Peeters-1.png
+    Tenant workspace / payments / statements / messages
+64. Tenant profile edit drawer-5.png
+    Tenant workspace / payments / statements / messages
+65. Unit 01 utility meters dashboard-4.png
+    Properties and tenant utilities / handovers
+66. Utility handover workspace for tenant moves-3.png
+    Properties and tenant utilities / handovers
+67. Utility takeover and meter review-2.png
+    Properties and tenant utilities / handovers
+68. View-only tenant payments workspace-5.png
+    Tenant workspace / payments / statements / messages

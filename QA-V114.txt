@@ -1,0 +1,50 @@
+MANAGERENT4U V10.22.114 — VERIFICATION
+
+RESULT: 48 automated check groups passed, plus browser inspection of subscriber controls and new-customer defaults. No production deployment or live bank-provider call was performed in this workspace.
+
+15 POSTGRESQL CAPACITY CHECKS (actual migration in PGlite/PostgreSQL)
+- Basic 2 units / 2 current-upcoming tenants / 1 building / 1 owner.
+- Direct writes and multi-row inserts blocked for each record type.
+- Upcoming tenants count; ended and archived tenants remain in history without consuming current capacity.
+- Restoring/reactivating a tenant respects capacity; future end notices still count.
+- Replacing ended tenants works.
+- Downgrades preserve existing rows and allow editing; growth stays blocked.
+- Larger plans retain their existing capacity until admin sets explicit owner/building allowances.
+- Authenticated customers cannot raise limits, including under security-definer operations.
+- Customer-created workspaces receive basic defaults.
+- Workspace transfers respect destination capacity.
+- Boundary failures roll back the entire multi-row insert.
+- Migration is repeatable without resetting explicit limits.
+- Concurrency protection uses an actual workspace counter update before counting growth; simultaneous multi-connection production stress was not run here.
+
+11 BANK CHECK GROUPS
+- Eleven exact time cases cover 06:00, 12:00, 18:00 Brussels in winter, summer and both DST transitions.
+- Completed slots skipped; partial imports resume; recent errors back off; active leases respected.
+- Actual API rejects unauthorized cron calls, processes the specified connection, honors banking permission and pause, and rechecks completion after claiming the lease.
+- Actual scheduler SQL compiles and runs in PostgreSQL using recording-only HTTP/cron substitutes.
+- Six banks queued per tick; subsequent tick reaches remaining banks without immediate duplicates.
+- SQL and API calculate identical slots across DST.
+- Disabled subscriptions, paused automatic sync and suspended workspaces skipped before queue dispatch.
+- Repeated setup leaves a single replacement schedule.
+- Provider calls were stubbed; pg_cron/pg_net production extensions and real endpoint reachability still need installation verification.
+
+4 ADMIN API CHECK GROUPS
+- Unit/tenant, building and owner limits accepted by platform admin.
+- Invalid, negative, fractional and excessive values rejected before writes.
+- Explicit zero/unlimited limits supported.
+- Regular customer cannot update subscription limits through admin endpoint.
+
+18 PRESERVED REGRESSIONS
+- 13 tenant/date/reference checks: actual PostgreSQL tenant-save RPC, missing-field repair, retained address/lease/EPC metadata/costs, reopen/edit/idempotency/permissions, lease durations, month ends, typed dates and readable rent communication.
+- 5 payment checks: real FinancialIncomeDialog posting function labels manual and bank-matched allocation months, preserves exact amounts, avoids duplicate in-flight submissions and never reports a failed save as successful. Inline/external finance implementations still agree.
+
+BROWSER / STATIC CHECKS
+- Real UsersPage: subscriber administration shows Units / tenants, Buildings, Owners, Users and existing Bank checking control.
+- New customer defaults visibly 2 units/current tenants, 1 building, 1 owner, 1 user; banking off by default.
+- All 28 inline JavaScript scripts parse; changed server modules parse.
+- Main and offline HTML copies identical.
+- No new Vercel function; existing Vercel daily cron expressions unchanged.
+- Full ZIP and upload batches are checked for CRC and exact per-file byte equality with this release.
+
+INSTALLATION / LIVE LIMIT
+Run setup/V10.22.114-SETUP.sql after deploying all files. Read START-HERE-V114.txt. The SQL has not been applied to your live database here. Confirm live bank timestamps after the three scheduled rounds before declaring production scheduling verified. Valid bank consent, available bank/provider service, running Supabase project, matching CRON_SECRET and an HTTP-accessible Vercel production endpoint are required. Existing hosting/provider usage limits still apply.

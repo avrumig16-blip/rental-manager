@@ -1,0 +1,38 @@
+ManageRent4U V110 — primary complete-board mapping
+
+This is a mapping of implemented areas, not a pass certificate for every pictured
+state. Service-backed actions retain the existing permissions and review flows.
+
+01 Login → workspace: Auth88 Transition / Chooser; one/multiple workspace routing,
+   loading and retry states retained. Chooser visually checked; live session retry
+   and provider authentication not exercised.
+02 Login and accounts: Auth88 sign-in, verification, passkey, recovery, reset,
+   workspace switching and sign-out retained. Sign-in surfaces polished and checked.
+03 Owner directory/workspace: directory list/cards, four metrics, portfolio/activity,
+   linked properties/units/tenants, edit, bank details, archive and read-only retained.
+04 Owner statements/rent updates/portal: financial collection, owner net statement,
+   account details, preview/send review, schedules and owner confirmation retained.
+05 Rent record/match/split/correct: shared Receipt95 allocation and review, exact
+   cent suggestions, all earlier arrears, bank match and corrections retained.
+06 Rent monthly workspace: filters/export, ledger/account drawer, statements,
+   payments/charges/activity, balances and read-only retained.
+07 Record sharing: Users & sharing → Shared links → choose/review; external scoped
+   browse and revocation retained. No real share email sent during verification.
+08 Team access: person + role → selected-property permissions → review; invitations,
+   acceptance and access management retained. Selection/review checked locally.
+09 Tenant directory/setup/profile: A–Z and total arrears, four-step inherited-address
+   creation, ID import, four metrics, three information cards, activity/tasks and edit.
+10 Owner messages/tasks/documents: existing scoped conversations, review before
+   send, private/shared tasks and real files retained; owner tabs checked locally.
+11 Rent statements/reminders/automation: period selection and original statement
+   model, review before send, reminders/thanks, schedules and delivery states retained.
+12 Tenant lifecycle: compact lease workspace and real contract generation/signing,
+   provider handover/meter records, notices/indexation, access and closure retained.
+13 Tenant messages/tasks/documents: conversations and recipient activity, task
+   drawers, file visibility and original-file inline preview/retry checked locally.
+14 Tenant payments/statements/reminders: ledger/account drawer, receipt/allocation,
+   historical months/charges, statement PDF and payment communication retained.
+
+Local fixture data varies from board examples. Real files, amounts, roles and
+states come from the connected records. No example contract or balance substitutes
+for a production record. See QA-V110.txt for actual test scope and live limitations.
