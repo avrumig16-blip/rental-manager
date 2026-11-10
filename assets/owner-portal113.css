@@ -1,0 +1,131 @@
+/* Owner portal: a complete, contained workspace using the approved visual system. */
+@layer approved106 {
+html.design106 body #root .p113-portal{display:block!important;width:100%!important;min-height:100dvh!important;margin:0!important;padding:0!important;background:#f4f7f6!important;color:#17352c!important;font:13px/1.6 'MR4U UI',Arial,sans-serif!important}
+html.design106 body #root .p113-portal *{box-sizing:border-box!important}
+html.design106 body #root .p113-topbar{position:static!important;display:block!important;width:100%!important;height:auto!important;min-height:70px!important;padding:0!important;margin:0!important;background:#fff!important;border:0!important;border-bottom:1px solid #e1e9e4!important;box-shadow:none!important}
+html.design106 body #root .p113-topbar-inner{max-width:1280px!important;margin:auto!important;min-height:70px!important;padding:14px 28px!important;display:flex!important;align-items:center!important;gap:20px!important}
+html.design106 body #root .p113-brand{display:flex!important;align-items:center!important;gap:9px!important;white-space:nowrap!important;margin-right:auto!important}
+html.design106 body #root .p113-brand>span{display:grid!important;place-items:center!important;background:#075b42!important;color:#fff!important;width:33px!important;height:33px!important;border-radius:6px!important;font-size:15px!important;font-weight:700!important;letter-spacing:-2px!important;padding-right:2px!important}
+html.design106 body #root .p113-brand>b{font-size:18px!important;letter-spacing:-.6px!important;color:#14392d!important}
+html.design106 body #root .p113-access{display:flex!important;align-items:center!important;gap:7px!important;padding:5px 10px!important;border-radius:20px!important;background:#edf6f0!important;color:#397158!important;font-size:11px!important;font-weight:600!important;white-space:nowrap!important}
+html.design106 body #root .p113-owner-mini{display:flex!important;align-items:center!important;gap:9px!important;border-left:1px solid #e0e9e3!important;padding-left:18px!important;font-size:12px!important}
+html.design106 body #root .p113-owner-mini>span{width:31px!important;height:31px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#eaf2ed!important;color:#31684c!important;font-size:11px!important}
+html.design106 body #root .p113-shell{width:100%!important;max-width:1280px!important;padding:28px!important;margin:0 auto!important}
+html.design106 body #root .p113-owner-header{display:flex!important;align-items:center!important;gap:15px!important;margin-bottom:24px!important}
+html.design106 body #root .p113-avatar{width:52px!important;height:52px!important;display:grid!important;place-items:center!important;flex:none!important;border:1px solid #d5e6da!important;border-radius:50%!important;background:#e6f0e9!important;color:#2a6748!important;font-size:17px!important;font-weight:700!important}
+html.design106 body #root .p113-owner-header small{font-size:9px!important;letter-spacing:1.2px!important;font-weight:700!important;color:#748c7c!important}
+html.design106 body #root .p113-owner-header h1{font-size:24px!important;line-height:1.35!important;letter-spacing:-.6px!important;margin:2px 0 3px!important;color:#15392b!important}
+html.design106 body #root .p113-owner-header p{font-size:12px!important;color:#7b8e81!important;margin:0!important}
+html.design106 body #root .p113-tabs{display:flex!important;align-items:stretch!important;gap:8px!important;overflow-x:auto!important;background:#fff!important;border:1px solid #dfe8e1!important;border-radius:8px!important;padding:0 14px!important;margin:0 0 28px!important;box-shadow:0 2px 4px #17352c03!important}
+html.design106 body #root .p113-portal button{font:600 12px/1.4 'MR4U UI',Arial,sans-serif!important;min-height:36px!important;padding:8px 12px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;color:#315f4a!important;background:white!important;border:1px solid #cdded2!important;border-radius:5px!important;cursor:pointer!important;box-shadow:none!important;max-width:100%!important}
+html.design106 body #root .p113-portal button.primary{background:#076346!important;border-color:#076346!important;color:white!important}
+html.design106 body #root .p113-portal button:disabled{opacity:.45!important;cursor:not-allowed!important}
+html.design106 body #root .p113-portal button:hover:not(:disabled){filter:brightness(.97)!important}
+html.design106 body #root .p113-portal :is(button,a,input,textarea,select):focus-visible{outline:2px solid #68a087!important;outline-offset:3px!important}
+html.design106 body #root .p113-tabs>button{position:relative!important;min-height:49px!important;padding:14px 11px!important;flex:none!important;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;background:transparent!important;font-size:12px!important;font-weight:400!important;color:#7a8b80!important;white-space:nowrap!important}
+html.design106 body #root .p113-tabs>button[aria-current=page]{color:#006349!important;border-bottom-color:#006349!important;font-weight:700!important}
+html.design106 body #root .p113-tabs>button>span{font-size:10px!important;background:#e9f2eb!important;border-radius:10px!important;padding:1px 6px!important;color:#397158!important}
+html.design106 body #root .p113-section-title{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important;margin-bottom:20px!important}
+html.design106 body #root .p113-section-title h2{font-size:20px!important;font-weight:700!important;letter-spacing:-.4px!important;color:#173d2c!important;margin:0 0 4px!important}
+html.design106 body #root .p113-section-title p{font-size:12px!important;color:#7a8c80!important;margin:0!important}
+html.design106 body #root .p113-metrics{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin-bottom:22px!important}
+html.design106 body #root .p113-metrics>:is(button,section){display:flex!important;justify-content:flex-start!important;gap:13px!important;text-align:left!important;background:#fff!important;border:1px solid #e0e8e2!important;border-radius:7px!important;padding:17px!important;min-height:92px!important}
+html.design106 body #root .p113-metric-icon,html.design106 body #root .p113-file-icon{display:grid!important;place-items:center!important;width:36px!important;height:39px!important;background:#edf5ef!important;color:#30724e!important;border-radius:6px!important;flex:none!important}
+html.design106 body #root .p113-metrics small{display:block!important;font-size:11px!important;font-weight:400!important;color:#819184!important;margin-bottom:4px!important}
+html.design106 body #root .p113-metrics strong{display:block!important;font-size:22px!important;line-height:1.35!important;font-weight:700!important;color:#244c35!important;letter-spacing:-.4px!important}
+html.design106 body #root .p113-metrics>:nth-child(2) strong{font-size:14px!important;letter-spacing:0!important;line-height:1.5!important}
+html.design106 body #root .p113-overview-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px!important;margin-bottom:20px!important;align-items:start!important}
+html.design106 body #root .p113-panel{background:#fff!important;border:1px solid #dfe8e1!important;border-radius:8px!important;padding:20px!important;min-width:0!important;margin:0!important}
+html.design106 body #root .p113-panel>header{position:static!important;background:transparent!important;border:0!important;padding:0!important;height:auto!important;min-height:0!important;display:flex!important;justify-content:space-between!important;align-items:center!important;flex-direction:row!important;text-align:left!important;gap:10px!important;margin:0 0 14px!important;box-shadow:none!important}
+html.design106 body #root .p113-panel h3{font-size:14px!important;font-weight:700!important;color:#244733!important;line-height:1.5!important;margin:0!important}
+html.design106 body #root .p113-panel>header>button{padding:3px 0!important;min-height:24px!important;border:0!important;background:transparent!important;font-size:11px!important}
+html.design106 body #root .p113-count{font-size:10px!important;font-weight:600!important;background:#eff5f0!important;color:#7a8d7d!important;padding:2px 8px!important;border-radius:12px!important}
+html.design106 body #root .p113-property{display:flex!important;align-items:center!important;gap:13px!important;padding:15px 0!important;border-bottom:1px solid #edf1ed!important}
+html.design106 body #root .p113-property:last-child{border:0!important;padding-bottom:2px!important}
+html.design106 body #root .p113-building-icon{display:grid!important;place-items:center!important;width:47px!important;height:49px!important;background:#f2f6f1!important;color:#78907a!important;border:1px solid #e6ece4!important;border-radius:5px!important;flex:none!important}
+html.design106 body #root .p113-property b{font-size:12px!important;font-weight:600!important}
+html.design106 body #root .p113-property small{font-size:11px!important;display:block!important;margin-top:3px!important;color:#8a988b!important}
+html.design106 body #root .p113-portal .p113-record,html.design106 body #root .p113-task-list>button,html.design106 body #root .p113-message-list>button{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;text-align:left!important;width:100%!important;border:0!important;border-bottom:1px solid #edf1ed!important;border-radius:0!important;background:#fff!important;padding:14px 0!important}
+html.design106 body #root .p113-record>span:nth-child(2),html.design106 body #root .p113-task-list>button>span:nth-child(2),html.design106 body #root .p113-message-list>button>span:nth-child(2){flex:1!important;min-width:0!important}
+html.design106 body #root .p113-record b,html.design106 body #root .p113-task-list b,html.design106 body #root .p113-message-list b{display:block!important;font-size:12px!important;font-weight:600!important}
+html.design106 body #root .p113-record small,html.design106 body #root .p113-task-list small,html.design106 body #root .p113-message-list small{display:block!important;margin-top:4px!important;font-size:11px!important;font-weight:400!important;color:#8b998e!important;overflow-wrap:anywhere!important}
+html.design106 body #root .p113-record-date,html.design106 body #root .p113-message-list time{font-size:10px!important;font-weight:400!important;color:#9aa69b!important;white-space:nowrap!important}
+html.design106 body #root .p113-record:last-child,html.design106 body #root .p113-task-list>button:last-child,html.design106 body #root .p113-message-list>button:last-child{border:0!important}
+html.design106 body #root .p113-empty{padding:24px 14px!important;display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:7px!important;color:#8b9c8e!important;background:transparent!important}
+html.design106 body #root .p113-empty h3{font-size:13px!important;color:#486c53!important;margin:3px 0 0!important}
+html.design106 body #root .p113-empty p{font-size:11px!important;line-height:1.7!important;margin:0!important;max-width:320px!important;color:#8b9a8d!important}
+html.design106 body #root .p113-error{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:14px!important;background:#fff1ee!important;border:1px solid #edc8c1!important;border-radius:7px!important;padding:14px!important;margin-bottom:20px!important;color:#a64536!important}
+html.design106 body #root .p113-footer{display:flex!important;justify-content:space-between!important;gap:12px!important;font-size:10px!important;color:#a1afa3!important;padding:25px 0 4px!important;margin:10px 0 0!important;border-top:1px solid #e2eae3!important;background:transparent!important}
+html.design106 body #root .p113-loading{padding:85px 20px!important;text-align:center!important;background:#fff!important;border:1px solid #dfe8e1!important;border-radius:8px!important}
+html.design106 body #root .p113-loading>span{display:inline-block!important;width:28px!important;height:28px!important;border:2px solid #e1ece3!important;border-top-color:#006349!important;border-radius:50%!important;animation:p113-spin 1s linear infinite!important}
+html.design106 body #root .p113-loading h2{font-size:18px!important;margin:15px 0 5px!important}
+html.design106 body #root .p113-loading p{color:#8b9a8d!important;font-size:12px!important}
+@keyframes p113-spin{to{transform:rotate(360deg)}}
+html.design106 body #root .p113-rent{position:relative!important}html.design106 body #root .p113-report-selector{display:flex!important;position:absolute!important;right:0!important;top:0!important;width:220px!important;justify-content:flex-end!important;margin:0!important}html.design106 body #root .p113-rent:has(.p113-report-selector) .p72-heading{padding-right:250px!important;min-height:65px!important}
+html.design106 body #root .p113-portal :is(input,select,textarea){font:12px/1.5 'MR4U UI',Arial,sans-serif!important;color:#385c45!important;background:#fff!important;border:1px solid #d8e3da!important;border-radius:5px!important;min-height:38px!important;padding:9px 11px!important;max-width:100%!important;box-shadow:none!important}
+html.design106 body #root .p113-portal input[type=checkbox]{width:16px!important;height:16px!important;min-height:16px!important;accent-color:#006349!important;margin:0!important;flex:none!important}
+html.design106 body #root .p113-portal label{font-size:11px!important;color:#819284!important}
+html.design106 body #root .p113-portal .u92-field{display:flex!important;flex-direction:column!important;gap:6px!important;min-width:0!important}
+/* Rent report lives inside the portal; no second outer page or fixed overlay footer. */
+html.design106 body #root .p113-portal .p72-report{display:block!important;width:100%!important;max-width:none!important;padding:0!important;margin:0!important;background:transparent!important;min-height:0!important}
+html.design106 body #root .p113-portal .p72-heading{margin:0 0 20px!important;padding:0!important}
+html.design106 body #root .p113-portal .p72-heading>p{display:none!important}
+html.design106 body #root .p113-portal .p72-heading h1{font-size:23px!important;font-weight:700!important;letter-spacing:-.5px!important;margin:0 0 5px!important;color:#183e2c!important}
+html.design106 body #root .p113-portal .p72-heading>div{font-size:12px!important;color:#8a9a8c!important}
+html.design106 body #root .p113-portal .p72-metrics{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;background:none!important;border:0!important;padding:0!important;margin:0 0 20px!important;box-shadow:none!important}
+html.design106 body #root .p113-portal .p72-metrics>div{display:block!important;border:1px solid #dfe8e1!important;border-radius:7px!important;background:#fff!important;padding:18px 20px!important;min-height:90px!important}
+html.design106 body #root .p113-portal .p72-metrics span{display:block!important;font-size:11px!important;color:#829285!important;margin-bottom:5px!important}
+html.design106 body #root .p113-portal .p72-metrics strong{font-size:24px!important;font-weight:700!important;letter-spacing:-.4px!important;color:#214b35!important;font-variant-numeric:tabular-nums!important}
+html.design106 body #root .p113-portal .p72-metrics strong.positive{color:#2e8058!important}
+html.design106 body #root .p113-portal .p72-metrics strong.negative{color:#b87028!important}
+html.design106 body #root .p113-portal .p72-toolbar{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:14px!important;padding:0!important;margin:0 0 14px!important}
+html.design106 body #root .p113-portal .p72-toolbar label{display:flex!important;align-items:center!important;gap:9px!important;min-width:200px!important}
+html.design106 body #root .p113-portal .p72-toolbar label>svg{display:none!important}
+html.design106 body #root .p113-portal .p72-toolbar select{width:240px!important}
+html.design106 body #root .p113-portal .p72-card{background:#fff!important;border:1px solid #dfe8e1!important;border-radius:8px!important;box-shadow:none!important}
+html.design106 body #root .p113-portal .p72-review-card{overflow:hidden!important;padding:0!important;margin:0!important}
+html.design106 body #root .p113-portal .p72-table-wrap{overflow-x:auto!important;width:100%!important}
+html.design106 body #root .p113-portal .p72-table{width:100%!important;border-collapse:collapse!important;table-layout:auto!important;margin:0!important}
+html.design106 body #root .p113-portal .p72-table th{font-size:10px!important;font-weight:600!important;background:#f3f7f3!important;color:#7c8f7e!important;padding:13px 16px!important;border-bottom:1px solid #dfe8e1!important;white-space:nowrap!important}
+html.design106 body #root .p113-portal .p72-table td{font-size:12px!important;line-height:1.6!important;padding:18px 16px!important;border-bottom:1px solid #edf1ed!important;color:#637d67!important;vertical-align:middle!important}
+html.design106 body #root .p113-portal .p72-table td b{font-size:12px!important;color:#284c35!important;line-height:1.6!important}
+html.design106 body #root .p113-portal .p72-table :is(th,td):nth-child(n+3):nth-child(-n+5){text-align:right!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+html.design106 body #root .p113-portal .p72-table td.negative{color:#bd782c!important;font-weight:600!important}
+html.design106 body #root .p113-portal .p72-update{display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;min-width:165px!important}
+html.design106 body #root .p113-portal .p72-update label{display:flex!important;align-items:center!important;gap:7px!important;color:#476a50!important;font-size:11px!important}
+html.design106 body #root .p113-portal .p72-update>button{min-height:24px!important;padding:3px 0!important;background:transparent!important;border:0!important;color:#859686!important;font-size:10px!important}
+html.design106 body #root .p113-portal .p72-status{padding:3px 8px!important;border-radius:5px!important;font-size:10px!important;font-weight:600!important;border:0!important}
+html.design106 body #root .p113-portal .p72-status.unpaid{background:#fff2e5!important;color:#b77c3a!important}
+html.design106 body #root .p113-portal .p72-status.paid{background:#e8f5eb!important;color:#3f8255!important}
+html.design106 body #root .p113-portal .p72-status.partial{background:#fff7df!important;color:#9b8134!important}
+html.design106 body #root .p113-portal .p72-submit{position:sticky!important;inset:auto!important;bottom:12px!important;width:100%!important;max-width:none!important;margin:18px 0 0!important;padding:15px 18px!important;display:flex!important;justify-content:space-between!important;align-items:center!important;gap:14px!important;border:1px solid #d6e2d9!important;background:#fff!important;border-radius:7px!important;box-shadow:0 5px 20px #17352c09!important;z-index:3!important}
+html.design106 body #root .p113-portal .p72-submit b{font-size:12px!important}
+html.design106 body #root .p113-portal .p72-submit p{font-size:10px!important;margin:3px 0 0!important;color:#8c9b8d!important}
+html.design106 body #root .p113-portal .p72-receipt-form{padding:16px!important;background:#f4f8f4!important;border:1px solid #e0e9e0!important;border-radius:6px!important;gap:12px!important}
+html.design106 body #root .p113-portal .p72-partial{font-size:11px!important;padding-top:12px!important}
+html.design106 body #root .p113-task-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+html.design106 body #root .p113-task-card>h3{font-size:16px!important;margin:0 0 10px!important}
+html.design106 body #root .p113-task-card>p{font-size:12px!important;color:#819382!important;white-space:pre-wrap!important;min-height:40px!important}
+html.design106 body #root .p113-task-card dl{border-top:1px solid #e8eee7!important;padding-top:12px!important;margin:14px 0!important}
+html.design106 body #root .p113-task-card dl>div{display:flex!important;justify-content:space-between!important;gap:12px!important;padding:4px 0!important;font-size:11px!important}
+html.design106 body #root .p113-task-card dt{color:#96a496!important}
+html.design106 body #root .p113-task-card dd{margin:0!important;color:#5f7d65!important}
+html.design106 body #root .p113-task-card>.u92-field{margin-bottom:15px!important}
+html.design106 body #root .p113-messages{display:grid!important;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr)!important;gap:20px!important;align-items:start!important}
+html.design106 body #root .p113-conversation .u92-thread{display:flex!important;flex-direction:column!important;gap:16px!important;max-height:620px!important;overflow:auto!important;padding:3px!important}
+html.design106 body #root .p113-conversation .u92-thread article{max-width:90%!important;border:1px solid #e7ede6!important;border-radius:7px!important;background:#f5f8f4!important;padding:14px!important;margin:0!important;font-size:12px!important}
+html.design106 body #root .p113-conversation .u92-thread article.owner{align-self:flex-end!important;background:#edf6ef!important;border-color:#d8e9dd!important}
+html.design106 body #root .p113-conversation article header{display:flex!important;justify-content:space-between!important;gap:12px!important;position:static!important;border:0!important;background:transparent!important;height:auto!important;min-height:0!important;padding:0!important;margin-bottom:8px!important;box-shadow:none!important}
+html.design106 body #root .p113-conversation article time{font-size:9px!important;color:#9baa9a!important}
+html.design106 body #root .p113-conversation article h4{font-size:12px!important;margin:0 0 6px!important}
+html.design106 body #root .p113-conversation article p{font-size:12px!important;white-space:pre-wrap!important;color:#738775!important;margin:0!important}
+html.design106 body #root .p113-compose textarea{min-height:170px!important;resize:vertical!important;width:100%!important}
+html.design106 body #root .p113-compose>button{width:100%!important}
+html.design106 body #root .p113-muted{font-size:10px!important;color:#91a091!important;margin:10px 0 14px!important}
+html.design106 body #root .p113-documents .u92-title{display:none!important}html.design106 body #root .p113-documents .u92-panel{padding:20px!important;background:#fff!important;border:1px solid #dfe8e1!important;border-radius:8px!important}
+html.design106 body #root .p113-documents .u92-field{max-width:340px!important;margin-bottom:16px!important}
+html.design106 body #root .p113-documents .o94-table-wrap{overflow:auto!important}
+@media(max-width:1000px){html.design106 body #root .p113-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}html.design106 body #root .p113-task-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}html.design106 body #root .p113-overview-grid{grid-template-columns:minmax(0,1fr)!important}html.design106 body #root .p113-owner-mini b{display:none!important}}
+@media(max-width:700px){html.design106 body #root .p113-report-selector{position:static!important;width:100%!important;margin-bottom:18px!important;justify-content:flex-start!important}html.design106 body #root .p113-rent:has(.p113-report-selector) .p72-heading{padding-right:0!important;min-height:0!important}html.design106 body #root .p113-shell{padding:20px 14px!important}html.design106 body #root .p113-topbar-inner{padding:12px 16px!important;gap:10px!important}html.design106 body #root .p113-owner-mini{display:none!important}html.design106 body #root .p113-brand>b{font-size:16px!important}html.design106 body #root .p113-access{font-size:10px!important;padding:4px 7px!important}html.design106 body #root .p113-owner-header h1{font-size:21px!important}html.design106 body #root .p113-tabs{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;padding:0 4px!important;margin-bottom:22px!important;overflow:visible!important}html.design106 body #root .p113-tabs>button{font-size:11px!important;padding:12px 10px!important}html.design106 body #root .p113-tabs>button>svg{display:none!important}html.design106 body #root .p113-section-title{align-items:start!important;flex-direction:column!important;gap:12px!important}html.design106 body #root .p113-section-title h2{font-size:19px!important}html.design106 body #root .p113-metrics{gap:10px!important}html.design106 body #root .p113-metrics>:is(button,section){padding:12px!important;gap:9px!important}html.design106 body #root .p113-metrics strong{font-size:19px!important}html.design106 body #root .p113-metrics>:nth-child(2) strong{font-size:12px!important}html.design106 body #root .p113-metric-icon{width:28px!important;height:32px!important}html.design106 body #root .p113-panel{padding:16px!important}html.design106 body #root .p113-messages,html.design106 body #root .p113-task-grid{grid-template-columns:minmax(0,1fr)!important}html.design106 body #root .p113-portal .p72-metrics{gap:8px!important}html.design106 body #root .p113-portal .p72-metrics>div{padding:12px 9px!important;min-height:78px!important}html.design106 body #root .p113-portal .p72-metrics strong{font-size:18px!important}html.design106 body #root .p113-portal .p72-metrics span{font-size:10px!important}html.design106 body #root .p113-portal .p72-toolbar{align-items:start!important;flex-wrap:wrap!important}html.design106 body #root .p113-portal .p72-submit{flex-wrap:wrap!important;bottom:8px!important;padding:12px!important}html.design106 body #root .p113-portal .p72-table-wrap{overflow-x:auto!important}html.design106 body #root .p113-record-date{display:none!important}html.design106 body #root .p113-footer{flex-direction:column!important;gap:3px!important}}
+@media(prefers-reduced-motion:reduce){html.design106 body #root .p113-loading>span{animation:none!important}}
+}
