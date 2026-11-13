@@ -1,0 +1,39 @@
+/* V102: shared readable intake/import layout, scoped away from other forms. */
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102{padding:18px!important;margin:0 0 22px!important;background:#f5faf8!important;border:1px solid #dbe8e2!important;border-radius:9px!important;min-width:0!important;color:#172d3c!important;grid-column:1/-1!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102 h3{font-size:15px!important;margin:0 0 8px!important;letter-spacing:0!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102 p{font-size:12px!important;line-height:1.7!important;margin:8px 0 14px!important;color:#5e7181!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102>input{background:white!important;max-width:100%!important;font-size:12px!important;min-height:40px!important;padding:8px!important;border:1px solid #d6e1e6!important;border-radius:6px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102-results>label{display:grid!important;grid-template-columns:18px minmax(95px,1fr) minmax(110px,1.4fr)!important;align-items:center!important;gap:10px!important;margin:12px 0!important;font-size:12px!important;color:#203647!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102-results input[type=checkbox]{width:16px!important;height:16px!important;min-height:0!important;accent-color:#00634b!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .id102-results input:not([type=checkbox]){width:100%!important;min-width:0!important;padding:9px!important;font:13px Arial!important;border:1px solid #d6e1e6!important;border-radius:6px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-address-fields{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;margin-top:20px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-address-fields .n95-field{margin:0!important}
+html.design76 body{background:#f5f8f7!important;color:#182d38!important;font-family:ManageRentUI,Arial,sans-serif!important}
+html.design76 .intake-card{width:min(1240px,100%)!important;gap:24px!important}
+html.design76 .intake-brand{border:1px solid #dfe7ed!important;border-radius:10px!important;padding:22px 26px!important;box-shadow:none!important;margin-bottom:0!important;gap:16px!important}
+html.design76 .intake-logo{background:#00634b!important;color:white!important;box-shadow:none!important;border-radius:8px!important;font-size:20px!important;width:48px!important;height:48px!important}
+html.design76 .intake-brand h1{font-size:25px!important;color:#172b37!important;letter-spacing:-.4px!important}
+html.design76 #tenantForm{border:1px solid #dfe7ed!important;border-radius:10px!important;background:white!important;padding:24px!important;min-width:0!important}
+html.design76 .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
+html.design76 .form-grid label{font-size:12px!important;color:#41586a!important;gap:8px!important;line-height:1.6!important;min-width:0!important}
+html.design76 .form-grid input{font-size:14px!important;border:1px solid #d3e0e5!important;padding:11px 12px!important;min-height:43px!important;border-radius:6px!important;box-shadow:none!important;color:#203847!important}
+html.design76 .form-actions{border-top:1px solid #e1e8ed!important;padding-top:20px!important;margin-top:24px!important;gap:10px!important;flex-wrap:wrap!important}
+html.design76 button{background:white!important;color:#174537!important;border:1px solid #ccdcd6!important;border-radius:6px!important;box-shadow:none!important;min-height:40px!important;padding:10px 14px!important;font-size:13px!important;transform:none!important}
+html.design76 button.primary,html.design76 .upload-btn{background:#00634b!important;color:white!important;border-color:#00634b!important}
+html.design76 .i76-summary{background:#fff!important;border:1px solid #dfe7ed!important;border-radius:10px!important;padding:22px!important;box-shadow:none!important;color:#344e5e!important}
+html.design76 .identity-section{border-radius:8px!important;box-shadow:none!important;background:white!important;padding:20px!important;border-color:#dfe7ed!important}
+html.design76 .id-control-panel{background:#f7fbf9!important;border-color:#cbded6!important;min-height:210px!important}
+html.design76 .id-doc-icon{background:#edf7f2!important;color:#00634b!important;box-shadow:none!important}
+html.design76 .intake-shell{padding:24px!important}
+@media(max-width:760px){html.design76 .form-grid{grid-template-columns:1fr!important}html.design76 .intake-shell{padding:12px!important}html.design76 #tenantForm{padding:18px!important}html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-address-fields{gap:12px!important}html body:is(body,#root#root#root#root#root#root#root#root#root) .id102-results>label{grid-template-columns:18px minmax(0,1fr)!important}html body:is(body,#root#root#root#root#root#root#root#root#root) .id102-results input:not([type=checkbox]){grid-column:2!important}}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .contract-intake-modal .contract-detail-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin:20px 0!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .contract-intake-modal .contract-detail-grid>div{padding:16px!important;border:1px solid #dfe7ed!important;border-radius:8px!important;background:#fff!important;min-width:0!important;line-height:1.65!important;overflow-wrap:anywhere!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .contract-intake-modal .contract-detail-grid small{font-size:11px!important;color:#65798b!important;display:block!important;margin-bottom:8px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .contract-intake-modal .contract-detail-grid b{font-size:14px!important;color:#182e3d!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-submitted-address{padding:18px!important;border:1px solid #dfe7ed!important;border-radius:8px!important;margin:0 0 20px!important;background:#f7fbf9!important}
+@media(max-width:760px){html body:is(body,#root#root#root#root#root#root#root#root#root) .contract-intake-modal .contract-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-contact-fields{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;margin-top:18px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-contact-fields .n95-field{margin:0!important;min-width:0!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-contact-fields .n95-field:first-child{grid-column:1/-1!important}
+@media(max-width:480px){html body:is(body,#root#root#root#root#root#root#root#root#root) .a102-contact-fields{grid-template-columns:1fr!important}}
+@media(max-width:1000px){html body:is(body,#root#root#root#root#root#root#root#root#root) .a101-wizard .a101-setup>fieldset>.n95-grid{grid-template-columns:1fr!important}}
