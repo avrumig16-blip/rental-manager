@@ -1,0 +1,72 @@
+/* Documents V130: a stable shared navigation and a dedicated statement workspace. */
+@layer approved106 {
+html.design106 body .n95-overlay:has(.statement130-dialog){align-items:center!important;justify-content:center!important;padding:24px!important}
+html.design106 body .n95.n95-dialog.d110-drawer.statement130-dialog{width:min(1480px,100%)!important;max-width:calc(100vw - 48px)!important;height:min(940px,calc(100dvh - 48px))!important;max-height:calc(100dvh - 48px)!important;border-radius:18px!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;box-shadow:0 24px 80px #122a3233!important}
+html.design106 body .statement130-dialog>header{flex:0 0 auto!important;position:relative!important;padding:18px 26px!important;min-height:76px!important;background:#fff!important;border-bottom:1px solid #dfe8e5!important}
+html.design106 body .statement130-dialog>header h2{font-size:23px!important;letter-spacing:-.5px!important}
+html.design106 body .statement130-dialog>.n95-dialog-body{flex:1 1 auto!important;overflow:auto!important;min-height:0!important;padding:22px 26px!important;background:#f6f9f8!important;scrollbar-gutter:stable!important;overscroll-behavior:contain!important}
+html.design106 body .statement130-dialog>footer{flex:0 0 auto!important;background:#fff!important;padding:12px 26px!important;min-height:64px!important}
+html.design106 body .statement130-footer{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;width:100%!important}
+html.design106 body .statement130-footer>span{display:flex!important;align-items:center!important;gap:8px!important;color:#6a7c77!important;font-size:12px!important}
+html.design106 body .statement130-intro{display:flex!important;align-items:center!important;gap:14px!important;margin:0 0 18px!important}
+html.design106 body .statement130-intro h3{font-size:20px!important;margin:0!important}
+html.design106 body .statement130-intro p{font-size:13px!important;margin:5px 0 0!important}
+html.design106 body .statement130-symbol{display:grid!important;place-items:center!important;width:50px!important;height:50px!important;flex-shrink:0!important;border-radius:14px!important;background:#e5f2ec!important;color:#00654e!important}
+html.design106 body .statement130-context{display:flex!important;align-items:center!important;gap:24px!important;border:1px solid #dce7e2!important;border-radius:12px!important;background:white!important;padding:14px 18px!important;margin:0 0 18px!important}
+html.design106 body .statement130-context>.n95-field{width:min(420px,50%)!important;margin:0!important;flex-shrink:0!important}
+html.design106 body .statement130-linked{min-width:0!important;border-left:1px solid #dfe8e5!important;padding-left:24px!important}
+html.design106 body .statement130-linked b{display:block!important;font-size:14px!important}
+html.design106 body .statement130-payments>.n95-heading{margin:0 0 14px!important}
+html.design106 body .statement130-payments>.n95-heading .n95-actions{gap:8px!important}
+html.design106 body .statement130-payments .n95-toolbar{border:1px solid #dce7e2!important;border-radius:12px!important;padding:14px 18px!important;margin:0 0 16px!important;background:white!important;display:flex!important;align-items:flex-end!important;gap:10px!important}
+html.design106 body .statement130-payments .n95-toolbar>.n95-field{width:220px!important;max-width:100%!important;margin:0!important}
+html.design106 body .statement130-payments .n95-stats{margin:0 0 20px!important;border:1px solid #dce7e2!important;border-radius:12px!important;overflow:hidden!important}
+html.design106 body .statement130-payments .n95-stats>section{padding:18px 22px!important;min-height:94px!important;background:white!important}
+html.design106 body .statement130-payments .n95-stats strong,html.design106 body .statement130-payments .n95-stats b{font-size:25px!important}
+html.design106 body .statement130-payments .d106-ledger-grid{display:grid!important;grid-template-columns:minmax(0,1fr) 340px!important;gap:20px!important;align-items:start!important}
+html.design106 body .statement130-payments .d106-ledger-grid>.n95-card{min-width:0!important;border-radius:12px!important;padding:18px!important;margin:0!important}
+html.design106 body .statement130-payments .n95-ledger-tools{display:flex!important;flex-wrap:wrap!important;gap:14px!important;align-items:flex-end!important;margin:16px 0!important}
+html.design106 body .statement130-payments .n95-ledger-tools>.n95-field{flex:1 0 180px!important;max-width:240px!important;margin:0!important}
+html.design106 body .statement130-payments .n95-ledger-tools>.n95-tabs{flex:1 1 420px!important;margin:0!important;gap:6px!important}
+html.design106 body .statement130-payments .n95-ledger-tools button{font-size:12px!important;min-height:34px!important;padding:8px 10px!important}
+html.design106 body .statement130-payments .n95-table-wrap{width:100%!important;min-width:0!important;overflow-x:auto!important}
+html.design106 body .statement130-payments table{min-width:640px!important;width:100%!important;table-layout:auto!important}
+html.design106 body .statement130-payments th,html.design106 body .statement130-payments td{font-size:12px!important;padding:13px 10px!important;white-space:nowrap!important}
+html.design106 body .statement130-payments .d106-ledger-aside{position:static!important;width:100%!important;height:auto!important;min-height:0!important;border:1px solid #dce7e2!important;border-radius:12px!important;padding:20px!important;background:white!important}
+html.design106 body .statement130-payments .d106-ledger-aside>.n95-tabs{display:flex!important;flex-wrap:wrap!important;margin:18px 0!important;gap:5px!important}
+html.design106 body .statement130-payments .d106-ledger-aside>.n95-tabs button{font-size:11px!important;padding:9px 7px!important;min-height:35px!important}
+html.design106 body .statement130-payments .d106-ledger-aside>.n95-actions{margin-top:18px!important;gap:9px!important}
+html.design106 body .statement130-payments .d106-ledger-aside>.n95-actions button{font-size:12px!important;min-height:39px!important}
+html.design106 body .statement130-communication{margin-top:20px!important;border:1px solid #dce7e2!important;border-radius:12px!important;background:white!important;padding:16px 18px!important}
+html.design106 body .statement130-communication>summary{cursor:pointer!important;font-size:14px!important;font-weight:700!important;display:flex!important;align-items:center!important;gap:10px!important}
+html.design106 body .statement130-communication:not([open])>.n95-actions{display:none!important}
+html.design106 body .statement130-communication[open]>.n95-actions{margin-top:16px!important}
+/* Shared page rhythm: remove duplicate navigation and keep title/nav positions aligned. */
+html.design106 body :is(.d69-documents,.w74-contracts,.signing-workspace,.studio-utilities){max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+html.design106 body :is(.d69-heading,.w74-contracts>.w74-heading,.signing-workspace>.business-head,.studio-utilities>.studio-page-title){min-height:88px!important;margin:0!important;padding:0 0 18px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;flex-wrap:wrap!important}
+html.design106 body .d69-documents>.d69-heading>div>small{display:none!important}
+html.design106 body :is(.d69-heading,.w74-heading,.signing-workspace>.business-head) h1{font-size:30px!important;line-height:1.25!important;margin:0!important;letter-spacing:-.5px!important}
+html.design106 body :is(.d69-heading,.w74-heading,.signing-workspace>.business-head) p{margin:7px 0 0!important;font-size:14px!important;line-height:1.5!important;color:#71818b!important}
+html.design106 body #root .m86-document-nav{margin:0 0 24px!important;min-height:52px!important;gap:6px!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;border-bottom:1px solid #dce5e6!important;padding:0!important;position:static!important}
+html.design106 body #root .m86-document-nav button{padding:13px 16px!important;min-height:48px!important;font-size:13px!important;gap:8px!important;white-space:nowrap!important}
+html.design106 body .d69-documents .d69-document-filters{display:grid!important;grid-template-columns:200px minmax(180px,1fr) minmax(160px,.7fr) minmax(160px,.7fr)!important;gap:10px!important;margin-bottom:18px!important}
+html.design106 body .d69-document-layout{align-items:start!important}
+html.design106 body .d69-document-aside{position:static!important;height:auto!important;min-height:0!important}
+html.design106 body .d69-documents .d69-panel{min-height:360px!important}
+@media(max-width:1250px){html.design106 body .statement130-payments .d106-ledger-grid{grid-template-columns:minmax(0,1fr)!important}html.design106 body .statement130-payments .d106-ledger-aside{max-width:none!important}html.design106 body .d69-documents .d69-document-filters{grid-template-columns:1fr 1fr!important}}
+@media(max-width:700px){html.design106 body .n95-overlay:has(.statement130-dialog){padding:0!important}html.design106 body .n95.n95-dialog.d110-drawer.statement130-dialog{width:100vw!important;max-width:100vw!important;height:100dvh!important;max-height:100dvh!important;border-radius:0!important}html.design106 body .statement130-dialog>header,html.design106 body .statement130-dialog>footer{padding:14px 16px!important}html.design106 body .statement130-dialog>.n95-dialog-body{padding:16px!important}html.design106 body .statement130-context{align-items:stretch!important;flex-direction:column!important;gap:10px!important}html.design106 body .statement130-context>.n95-field{width:100%!important}html.design106 body .statement130-linked{padding:0!important;border:0!important}html.design106 body .statement130-intro h3{font-size:17px!important}html.design106 body .statement130-footer>span{font-size:11px!important}html.design106 body .statement130-payments .n95-toolbar{flex-wrap:wrap!important}html.design106 body .statement130-payments .n95-ledger-tools>.n95-field{max-width:none!important}html.design106 body .d69-documents .d69-document-filters{grid-template-columns:1fr!important}}
+}
+@layer approved106 {
+html.design106 body .studio-utilities>.studio-page-title .studio-kicker{display:none!important}
+html.design106 body .studio-utilities>.studio-page-title h2{font-size:30px!important;line-height:1.25!important;margin:0!important}
+html.design106 body .studio-utilities>.studio-page-title p{font-size:14px!important;line-height:1.5!important;margin:7px 0 0!important}
+html.design106 body .signing-workspace>.business-head{max-width:none!important;width:100%!important}
+}
+@layer approved106 {
+html.design106 body .statement130-context>.n95-field{flex:0 1 420px!important}
+html.design106 body .statement130-payments .n95-toolbar>.n95-field{flex:0 1 240px!important}
+@media(max-width:700px){html.design106 body .statement130-context>.n95-field{flex:0 0 auto!important}html.design106 body .statement130-payments .n95-toolbar>.n95-field{flex:1 1 100%!important}}
+}
+@layer approved106 {
+html.design106 body .statement130-payments .d106-ledger-aside{display:block!important}
+}
