@@ -1,0 +1,13 @@
+/* Compact owner reports and the existing approved reminder composer. */
+@layer approved106 {
+html.design106 body #root .p113-portal .p113-shell,
+html.design106 body #root .p113-portal .p113-topbar-inner {max-width:1140px!important}
+html.design106 body #root .p113-portal .p72-table td {padding:13px 14px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p113-portal .p121-reminder {display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;border-top:0!important;padding:6px 0 0!important;margin-top:2px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p113-portal .p121-reminder-button {width:auto!important;min-height:32px!important;min-width:0!important;padding:6px 10px!important;justify-content:center!important;font-size:12px!important;border-radius:7px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .n95-dialog.reminder131-dialog {width:min(720px,calc(100vw - 32px))!important;max-width:720px!important;height:min(820px,calc(100dvh - 32px))!important;min-height:0!important;max-height:calc(100dvh - 32px)!important;margin:auto!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .reminder131-dialog .n95-facts {grid-template-columns:1fr!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .reminder131-dialog textarea {min-height:230px!important;resize:vertical!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .bank131-review-note {font-size:12px!important;color:#61766d!important;line-height:1.6!important;margin:0 0 14px!important;max-width:780px!important}
+@media(max-width:700px){html.design106 body #root .p113-portal .p72-table td {padding:11px 10px!important}html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .n95-dialog.reminder131-dialog {width:100vw!important;max-width:none!important}}
+}
