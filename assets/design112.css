@@ -1,0 +1,82 @@
+/* Focused improvements to the approved forest-green workspace. */
+@layer approved106 {
+html.design106 .mr112-date{display:block!important;width:100%!important;min-width:0!important}
+html.design106 .mr112-date>.pretty-date-button{width:100%!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;min-height:42px!important;padding:10px 12px!important;border:1px solid #d3dfe5!important;border-radius:6px!important;background:#fff!important;color:#193344!important;text-align:left!important}
+html.design106 .mr112-date>.pretty-date-button svg{display:block!important;flex:none!important;color:#006349!important}html.design106 .mr112-date>.pretty-date-button::before,html.design106 .mr112-date>.pretty-date-button::after{content:none!important;display:none!important}
+html.design106 body .mr112-calendar{position:fixed!important;z-index:200000!important;box-sizing:border-box!important;max-width:calc(100vw - 24px)!important;max-height:calc(100dvh - 24px)!important;overflow-x:hidden!important;overflow-y:auto!important;background:#fff!important;color:#193344!important;border:1px solid #d6e3df!important;border-radius:10px!important;padding:16px!important;box-shadow:0 14px 45px #102e2b24!important;transform:none!important;right:auto!important;bottom:auto!important;line-height:1.4!important;font:13px 'MR4U UI',Arial,sans-serif!important}
+html.design106 body .mr112-calendar *{box-sizing:border-box!important;min-width:0!important;margin:0!important;max-width:100%!important;box-shadow:none!important}
+html.design106 body .mr112-cal-title{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin-bottom:12px!important}
+html.design106 body .mr112-cal-title>b{font-size:14px!important;font-weight:700!important}
+html.design106 body .mr112-calendar button{display:flex!important;align-items:center!important;justify-content:center!important;border:1px solid #dce6e3!important;border-radius:5px!important;background:#fff!important;color:#17352e!important;font:600 12px 'MR4U UI',Arial,sans-serif!important;padding:0 8px!important;cursor:pointer!important;height:36px!important;min-height:36px!important;white-space:nowrap!important}
+html.design106 body .mr112-cal-title>button{width:30px!important;height:30px!important;min-height:30px!important;font-size:21px!important;border:0!important;background:#f3f7f5!important}
+html.design106 body .mr112-cal-entry{display:grid!important;grid-template-columns:minmax(0,1fr) 58px!important;gap:7px!important;padding-bottom:12px!important;border-bottom:1px solid #e7efeb!important;margin-bottom:12px!important}
+html.design106 body .mr112-cal-entry input{width:100%!important;height:38px!important;min-height:38px!important;padding:7px 9px!important;border:1px solid #cdded6!important;border-radius:5px!important;background:white!important;color:#193344!important;font:13px 'MR4U UI',Arial,sans-serif!important}
+html.design106 body .mr112-cal-entry button{height:38px!important;background:#006349!important;color:white!important;border-color:#006349!important}
+html.design106 body .mr112-calendar button:disabled{opacity:.4!important;cursor:default!important}
+html.design106 body .mr112-cal-nav{display:grid!important;grid-template-columns:30px minmax(0,1fr) 77px 30px!important;gap:5px!important;align-items:center!important;margin-bottom:12px!important}
+html.design106 body .mr112-cal-nav select{width:100%!important;min-width:0!important;height:36px!important;min-height:36px!important;padding:5px 2px!important;border:1px solid #dce6e3!important;border-radius:5px!important;background:#fff!important;color:#17352e!important;font:12px 'MR4U UI',Arial,sans-serif!important}
+html.design106 body .mr112-cal-week,html.design106 body .mr112-cal-days{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:4px!important;width:100%!important}
+html.design106 body .mr112-cal-week{margin-bottom:6px!important;color:#7b8d86!important;font-size:10px!important;text-align:center!important}
+html.design106 body .mr112-cal-days button{width:100%!important;padding:0!important;height:35px!important;min-height:35px!important;border-color:transparent!important;font-size:12px!important}
+html.design106 body .mr112-cal-days button.outside{color:#a8b4af!important}
+html.design106 body .mr112-cal-days button.today{border-color:#78a693!important;background:#f0f7f3!important}
+html.design106 body .mr112-cal-days button.selected{background:#006349!important;border-color:#006349!important;color:white!important}
+html.design106 body .mr112-calendar button:hover:not(:disabled){background:#eaf4ef!important;color:#006349!important}
+html.design106 body .mr112-calendar button:focus-visible,html.design106 body .mr112-calendar input:focus-visible,html.design106 body .mr112-calendar select:focus-visible{outline:2px solid #66a38c!important;outline-offset:2px!important}
+html.design106 body .mr112-cal-footer{display:flex!important;justify-content:space-between!important;gap:8px!important;padding-top:10px!important;margin-top:10px!important;border-top:1px solid #e7efeb!important}
+html.design106 .mr112-lease-summary{padding:10px 12px!important;border-left:3px solid #4c9676!important;background:#eff7f2!important;border-radius:4px!important;font-size:12px!important;color:#246249!important;line-height:1.6!important;margin:8px 0 14px!important}
+/* Four generous cards on desktop, keeping the complete uploaded image visible. */
+html.design106 .d68-property-grid.grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:20px!important}
+html.design106 .d68-property-grid.grid .d68-property-card{width:100%!important;max-width:none!important;border-radius:8px!important}
+html.design106 .d68-property-grid.grid .d68-property-media{height:210px!important;min-height:210px!important;max-height:210px!important}
+html.design106 .d68-property-grid.grid .d68-property-card img{height:210px!important;max-height:210px!important;object-fit:contain!important;object-position:center!important}
+html.design106 .d68-property-grid.grid .d68-property-copy{padding:18px!important}
+html.design106 .d68-property-grid.grid .d68-property-copy h3{font-size:18px!important}
+/* Owners: deliberate hierarchy, quiet rows, and matching card/list controls. */
+html.design106 .mr112-owners .u92-eyebrow{display:none!important}
+html.design106 .mr112-owners .u92-title{margin-bottom:20px!important}
+html.design106 .mr112-owner-summary{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:14px!important;margin-bottom:22px!important}
+html.design106 .mr112-owner-summary>section{display:flex!important;align-items:center!important;gap:13px!important;padding:18px!important;min-height:92px!important;border:1px solid #dfe7e5!important;border-radius:7px!important;background:#fff!important}
+html.design106 .mr112-summary-icon{width:42px!important;height:42px!important;display:grid!important;place-items:center!important;border-radius:8px!important;background:#edf6f1!important;color:#006349!important;flex:none!important}
+html.design106 .mr112-owner-summary small{display:block!important;font-size:12px!important;font-weight:400!important;color:#72847d!important;margin-bottom:4px!important}
+html.design106 .mr112-owner-summary strong{font-size:23px!important;line-height:1.3!important;color:#14382e!important;letter-spacing:-.5px!important;font-variant-numeric:tabular-nums!important}
+html.design106 .mr112-owners>.u92-panel{padding:0!important;border-color:#dfe7e5!important;border-radius:8px!important;overflow:visible!important;background:white!important}
+html.design106 .mr112-owners>.u92-panel>header{display:flex!important;justify-content:space-between!important;align-items:center!important;padding:20px 22px 0!important;margin:0!important;border:0!important}
+html.design106 .mr112-owners>.u92-panel>header h3{font-size:16px!important}
+html.design106 .mr112-directory-count{padding:4px 9px!important;background:#f0f5f2!important;border-radius:20px!important;color:#567568!important;font-size:11px!important}
+html.design106 .mr112-owner-toolbar{display:grid!important;grid-template-columns:minmax(200px,1fr) 190px auto!important;align-items:end!important;gap:14px!important;padding:18px 22px 22px!important;margin:0!important}
+html.design106 .mr112-owner-toolbar .u92-field{width:100%!important;max-width:none!important}
+html.design106 .mr112-owner-toolbar .u92-field>span{font-size:11px!important;font-weight:600!important;color:#587063!important;margin-bottom:5px!important}
+html.design106 .mr112-view-switch{display:flex!important;align-items:center!important;gap:0!important;border:1px solid #cdded5!important;border-radius:6px!important;overflow:hidden!important;height:40px!important}
+html.design106 .mr112-view-switch>button{border:0!important;border-radius:0!important;display:flex!important;gap:7px!important;align-items:center!important;padding:9px 14px!important;height:40px!important;min-height:40px!important}
+html.design106 .mr112-owner-table{margin:0!important;border:0!important;border-radius:0!important;overflow-x:auto!important}
+html.design106 .mr112-owner-table table{width:100%!important;table-layout:auto!important;border-collapse:collapse!important}
+html.design106 .mr112-owner-table th{padding:12px 22px!important;font-size:11px!important;font-weight:600!important;color:#6c8176!important;background:#f5f8f6!important;border-block:1px solid #e7eeea!important;white-space:nowrap!important}
+html.design106 .mr112-owner-table td{padding:18px 22px!important;vertical-align:middle!important;border-bottom:1px solid #edf1ee!important;font-size:13px!important}
+html.design106 .mr112-owner-table th:first-child{width:36%!important;text-align:left!important}
+html.design106 .mr112-owner-table :is(th,td):nth-child(n+2):nth-child(-n+5){text-align:right!important}
+html.design106 .mr112-owners .u92-record{padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;text-align:left!important;min-height:0!important;width:auto!important;max-width:100%!important}
+html.design106 .mr112-owners .u92-record:hover b{color:#006349!important;text-decoration:underline!important;text-underline-offset:3px!important}
+html.design106 .mr112-owners .u92-person{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+html.design106 .mr112-owners .u92-person b{display:block!important;font-size:14px!important;font-weight:700!important;color:#173d31!important;line-height:1.5!important}
+html.design106 .mr112-owners .u92-person small{display:block!important;font-size:11px!important;color:#788a80!important;line-height:1.6!important;overflow-wrap:anywhere!important}
+html.design106 .mr112-owners .u92-avatar{width:42px!important;height:42px!important;min-width:42px!important;display:grid!important;place-items:center!important;background:#eaf3ed!important;color:#38684e!important;border-radius:50%!important;object-fit:cover!important;font-size:13px!important;font-weight:700!important;flex:none!important}
+html.design106 .mr112-owners .mr112-money{font-weight:600!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+html.design106 .mr112-owners .mr112-money.green{color:#25714e!important}
+html.design106 .mr112-owners .mr112-money.amber{color:#b9751a!important}
+html.design106 .mr112-owner-count{padding:14px 22px!important;font-size:11px!important;color:#809087!important}
+html.design106 .mr112-owner-cards{padding:0 22px!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+html.design106 .mr112-owner-card{padding:18px!important;background:#fff!important;border:1px solid #dfe8e2!important;border-radius:7px!important;min-width:0!important}
+html.design106 .mr112-owner-card-head{display:flex!important;justify-content:space-between!important;align-items:start!important;gap:8px!important}
+html.design106 .mr112-owner-card-counts{display:flex!important;gap:18px!important;padding:16px 0!important;font-size:12px!important;color:#687f70!important}
+html.design106 .mr112-owner-card-counts b{font-size:15px!important;color:#244d38!important}
+html.design106 .mr112-owner-card dl{margin:0!important;padding:12px 0!important;border-block:1px solid #edf1ee!important}
+html.design106 .mr112-owner-card dl>div{display:flex!important;justify-content:space-between!important;gap:8px!important;padding:6px 0!important}
+html.design106 .mr112-owner-card dt{font-size:11px!important;color:#73877b!important}
+html.design106 .mr112-owner-card dd{margin:0!important;font-size:13px!important}
+html.design106 .mr112-owner-card footer{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:8px!important;padding-top:14px!important}
+html.design106 .mr112-owner-card footer button{display:flex!important;align-items:center!important;gap:8px!important;border:0!important;background:transparent!important;color:#006349!important;padding:4px 0!important;font-size:12px!important}
+@media(max-width:1199px){html.design106 .d68-property-grid.grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}html.design106 .mr112-owner-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:980px){html.design106 .mr112-owner-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important}html.design106 .d68-property-grid.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:650px){html.design106 .mr112-owner-toolbar{grid-template-columns:minmax(0,1fr)!important}html.design106 .mr112-view-switch{justify-self:start!important}html.design106 .mr112-owner-cards{grid-template-columns:minmax(0,1fr)!important}html.design106 .mr112-owner-summary>section{padding:12px!important;gap:9px!important;min-height:80px!important}html.design106 .mr112-owner-summary strong{font-size:18px!important}html.design106 .mr112-summary-icon{width:30px!important;height:32px!important}html.design106 .d68-property-grid.grid{grid-template-columns:minmax(0,1fr)!important}}
+}
