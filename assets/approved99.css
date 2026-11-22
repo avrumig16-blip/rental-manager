@@ -1,0 +1,131 @@
+/* V99: approved emerald/white workspace rhythm. Structural spacing, not a new theme. */
+
+html body:is(body,#root#root#root#root#root#root#root) :is(.n95,.u92,.o94,.studio-content) :is(button,input,select,textarea){font-family:ManageRentUI,MR95,Arial,sans-serif!important}
+html body:is(body,#root#root#root#root#root#root#root) :is(.n95-card,.u92-panel,.workspace-panel,.business-card,.s87-panel,.settings-section,.financial-owner-section){border-radius:10px!important;border-color:#dfe7ed!important;box-shadow:0 2px 6px #16382b03!important}
+html body:is(body,#root#root#root#root#root#root#root) :is(.workspace-panel-head,.studio-panel-head,.hub-list-head,.n95-card-head,.u92-panel>header){gap:14px!important;align-items:center!important}
+html body:is(body,#root#root#root#root#root#root#root) :is(.n95-card,.workspace-panel,.u92-panel,.s87-panel)>:is(h2,h3,h4):not(:first-child){margin-top:24px!important;margin-bottom:12px!important;line-height:1.45!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 :is(.n95-card-head h3,.n95-card>h3){font-size:14px!important;line-height:1.45!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-card-head{margin-bottom:18px!important;min-height:22px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-card>.n95-total{margin-top:16px!important;margin-bottom:18px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-card>.n95-actions{margin-top:14px!important;gap:10px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-card>.n95-table-wrap+button{margin-top:14px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-facts+button{margin-top:14px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-card :is(td,dd){line-height:1.65!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-actions>button{gap:8px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 button>svg{width:16px!important;height:16px!important;flex-shrink:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-tag{padding:5px 10px!important;line-height:1.4!important;font-size:11px!important;border-radius:6px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-dialog-body>.n95-person+.n95-stats{margin-top:4px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95-dialog.n95 .n95-card :is(h3,h4)+.n95-actions{margin-top:14px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95-dialog.n95 .n95-card>.n95-actions+h3{margin-top:22px!important;margin-bottom:12px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-timeline>div{align-items:start!important;gap:12px!important;padding:12px 14px!important;margin-bottom:10px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-timeline>div>svg{margin-top:3px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-timeline b{font-size:13px!important;line-height:1.5!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-timeline small{margin-top:4px!important;font-size:11px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-head{padding:20px 22px 4px!important;min-height:88px!important;align-items:center!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-head .n95-person{margin:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-head .n95-person b{font-size:24px!important;line-height:1.3!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-head>.n95-tag{margin-right:auto!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-links{padding:0 22px 10px 95px!important;min-height:27px!important;margin:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-tabs{margin-bottom:22px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats{gap:14px!important;margin-bottom:22px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats>section{min-height:106px!important;padding:18px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats small{line-height:1.5!important;font-size:12px!important;margin-bottom:6px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats strong{font-size:24px!important;line-height:1.3!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-facts>div{padding:10px 0!important;grid-template-columns:minmax(100px,.85fr) minmax(0,1.35fr)!important;gap:14px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-facts dt{font-size:12px!important;color:#617487!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-facts dd{font-size:13px!important;color:#233b4d!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-grid.three{gap:18px!important;align-items:stretch!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-grid.three>.n95-card{height:100%!important;padding:20px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .a99-activity>div{display:flex!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .a99-activity>div>span{flex:1!important;min-width:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .a99-activity>div>button{min-height:30px!important;padding:5px 10px!important;font-size:11px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-identity{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:18px!important;margin-bottom:22px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-identity .n95-person{margin:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-identity .n95-person b{font-size:14px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-status{display:flex!important;align-items:center!important;gap:10px!important;flex-shrink:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-status small{font-size:12px!important;margin:0!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats{gap:12px!important;margin:0 0 20px!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats>section{padding:16px!important;min-height:92px!important;display:flex!important;align-items:center!important;gap:12px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats .a96-metric-icon{display:flex!important;width:36px!important;height:36px!important;min-width:36px!important;border-radius:8px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats .a96-metric-icon svg{display:block!important;width:18px!important;height:18px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats small{font-size:12px!important;margin-bottom:6px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats strong{font-size:22px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-tabs{display:flex!important;gap:22px!important;padding:0!important;margin:0 0 24px!important;border-bottom:1px solid #dfe7ed!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-tabs>button{background:transparent!important;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;padding:11px 2px 13px!important;min-height:44px!important;font-size:13px!important;font-weight:500!important;color:#65768a!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-tabs>button.primary{background:transparent!important;color:#00634b!important;border-bottom-color:#00634b!important;font-weight:700!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-grid{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr)!important;gap:20px!important;align-items:start!important;margin-bottom:22px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-grid>.n95-card{height:auto!important;margin:0!important;padding:20px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-section{display:block!important;margin:0!important;padding:0!important;border:0!important;background:none!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-section+.a99-section{margin-top:24px!important;padding-top:22px!important;border-top:1px solid #e7edf1!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-section h4{font-size:13px!important;line-height:1.45!important;font-weight:700!important;margin:0 0 12px!important;color:#334c5c!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-section .n95-total{margin:16px 0 0!important;padding:12px 14px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-reference{margin-top:24px!important;padding-top:22px!important;border-top:1px solid #e7edf1!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-reference p{margin:0 0 14px!important;font-size:13px!important;line-height:1.7!important;overflow-wrap:anywhere!important;color:#506779!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n98-statement-file{margin:0 0 16px!important;gap:10px!important;padding:14px!important;min-height:56px!important;line-height:1.5!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-table-wrap table{min-width:0!important;font-size:12px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-table-wrap th{font-size:11px!important;padding:11px 10px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-table-wrap td{font-size:12px!important;padding:13px 10px!important;line-height:1.65!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-section>.n95-table-wrap :is(th,td):last-child{text-align:right!important;white-space:nowrap!important;font-variant-numeric:tabular-nums!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-receipts table{min-width:470px!important;table-layout:auto!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-receipts :is(th,td):is(:first-child,:nth-child(2),:nth-child(3)){white-space:nowrap!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-receipts :is(th,td):nth-child(3){text-align:right!important;font-variant-numeric:tabular-nums!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-receipts td:nth-child(4){min-width:95px!important;overflow-wrap:anywhere!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-receipts button{white-space:nowrap!important;min-width:104px!important;gap:6px!important;padding:7px 9px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-balance{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;margin-top:22px!important;padding:14px!important;background:#fff7eb!important;border:1px solid #f4e3c6!important;border-radius:7px!important;font-size:13px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-balance.green{background:#edf8f1!important;border-color:#d3eadb!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-balance strong{font-size:19px!important;white-space:nowrap!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95>.n95-dialog-body>.n95-actions{padding-top:0!important;margin-top:0!important;gap:10px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95>footer>.n95-actions{width:100%!important;gap:10px!important;justify-content:flex-end!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95>footer>.n95-actions>.danger{margin-right:auto!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95>footer button{white-space:nowrap!important;gap:7px!important;min-height:39px!important}
+@media(max-width:1100px){
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-grid.three>.n95-card:last-child{grid-column:1/-1!important}
+}
+@media(max-width:900px){
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-grid{grid-template-columns:1fr!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-status{flex-direction:column!important;align-items:flex-end!important;gap:4px!important}
+}
+@media(max-width:760px){
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-head{padding:18px 16px 8px!important;gap:12px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-head>.n95-actions{width:auto!important;margin-left:auto!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n95-profile-links{padding:0 16px 10px!important;flex-wrap:wrap!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-grid.three{grid-template-columns:1fr!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-grid.three>.n95-card:last-child{grid-column:auto!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats>section{padding:14px!important;min-height:98px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats strong{font-size:21px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats>section{display:block!important;min-height:90px!important;padding:11px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats .a96-metric-icon{display:none!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats small{font-size:10px!important;min-height:30px!important;margin-bottom:5px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .n95-stats strong{font-size:17px!important;overflow-wrap:normal!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-tabs{gap:18px!important;margin-bottom:20px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-tabs>button{font-size:12px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95 .a99-account-grid>.n95-card{padding:16px!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95>footer>.n95-actions{gap:8px!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html body:is(body,#root#root#root#root#root#root#root) .a99-account.n95>footer button{width:100%!important;margin:0!important;font-size:11px!important;padding:9px 8px!important}
+}
+
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-facts>div{padding:8px 0!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .a99-payment-instructions{border-top:1px solid #e7edf1!important;margin-top:14px!important;padding-top:13px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .a99-payment-instructions summary{color:#00634b!important;font-size:12px!important;font-weight:600!important;cursor:pointer!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .a99-payment-instructions[open] summary{margin-bottom:10px!important}
+@media(max-width:480px){
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats>section{display:flex!important;gap:8px!important;padding:13px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .a96-metric-icon{width:28px!important;min-width:28px!important;height:32px!important;border-radius:7px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .a96-metric-icon svg{width:16px!important;height:16px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats strong{font-size:19px!important;white-space:nowrap!important;overflow-wrap:normal!important;letter-spacing:-.4px!important}
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .n95-stats .a97-date strong{font-size:17px!important}
+}
+@media(max-width:360px){
+html body:is(body,#root#root#root#root#root#root#root) .n95.n95 .n98-overview .a96-metric-icon{display:none!important}
+}
+
+/* The applied indexation and an explicitly selected future cycle are distinct. */
+html body:is(body,#root#root#root#root#root#root#root) .index-cycle100{display:flex!important;align-items:center!important;gap:18px!important;flex-wrap:wrap!important;padding:16px 20px!important;margin:0 0 20px!important;background:white!important;border:1px solid #dfe7ed!important;border-radius:10px!important}
+html body:is(body,#root#root#root#root#root#root#root) .index-cycle100 label{display:flex!important;align-items:center!important;gap:12px!important;font-size:13px!important;font-weight:600!important}
+html body:is(body,#root#root#root#root#root#root#root) .index-cycle100 select{width:110px!important}
+html body:is(body,#root#root#root#root#root#root#root) .index-cycle100 span{font-size:13px!important;color:#00634b!important}
+html body:is(body,#root#root#root#root#root#root#root) .index-cycle100 p{width:100%!important;margin:0!important;font-size:13px!important;color:#637387!important}
+
+html body:is(body,#root#root#root#root#root#root#root) fieldset.index-form{border:0!important;padding:0!important;margin:0!important;min-width:0!important}
