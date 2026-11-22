@@ -1,0 +1,44 @@
+/* Current owner conversation presentation. Text and actions retain their existing permissions. */
+@layer approved106 {
+html #root#root .p113-tabs>button:not([aria-current=page]){border-bottom-color:transparent!important;color:#7a8b80!important;font-weight:400!important}
+html #root#root .p113-tabs>button[aria-current=page]{border-bottom-color:#006349!important;color:#006349!important;font-weight:700!important}
+
+html #root#root .p113-messages{display:grid!important;grid-template-columns:minmax(0,1fr) 350px!important;gap:24px!important;align-items:start!important}
+html #root#root .p113-conversation{min-width:0!important;background:#fff!important}
+html #root#root .p113-conversation>.u92-thread{display:flex!important;flex-direction:column!important;gap:20px!important;padding:24px!important;max-height:750px!important;overflow:auto!important;background:#f8faf9!important}
+html #root#root .p113-compose{position:sticky!important;top:24px!important}
+html #root#root .o94-mail-grid{grid-template-columns:260px minmax(0,1fr) 240px!important}
+html #root#root .o94-conversation{min-width:0!important;padding:24px!important}
+html #root#root .o94-thread{gap:20px!important;max-height:720px!important;padding:12px 2px 24px!important}
+html #root#root .m117-card{display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;align-self:stretch!important;border:1px solid #dde7e2!important;border-radius:12px!important;background:#fff!important;padding:0!important;margin:0!important;box-shadow:0 3px 10px #163b2d05!important;overflow:visible!important;text-align:left!important}
+html #root#root .m117-card.from-owner{border-color:#c9dfd4!important}
+html #root#root .m117-card .m117-meta{display:flex!important;align-items:center!important;flex-direction:row!important;justify-content:flex-start!important;flex-wrap:wrap!important;gap:12px!important;min-height:0!important;height:auto!important;padding:18px 22px!important;margin:0!important;border:0!important;border-bottom:1px solid #e9efeb!important;border-radius:12px 12px 0 0!important;background:#fafcfb!important}
+html #root#root .m117-card.from-owner .m117-meta{background:#f1f8f4!important}
+html #root#root .m117-card .m117-avatar{display:grid!important;place-items:center!important;flex:0 0 40px!important;width:40px!important;height:40px!important;border-radius:50%!important;background:#e4f1eb!important;color:#00664c!important;font-size:13px!important;font-weight:700!important}
+html #root#root .m117-card .m117-person{display:flex!important;flex-direction:column!important;gap:3px!important;min-width:0!important;flex:1!important}
+html #root#root .m117-card .m117-person b{font-size:14px!important;color:#173a34!important;line-height:1.4!important;overflow-wrap:anywhere!important}
+html #root#root .m117-card .m117-person small{font-size:11px!important;color:#6c8079!important;line-height:1.4!important}
+html #root#root .m117-card time{font-size:11px!important;line-height:1.5!important;color:#6b7d77!important;white-space:normal!important;margin-left:auto!important}
+html #root#root .m117-card .m117-content{display:block!important;padding:22px!important;min-width:0!important}
+html #root#root .m117-card h4{font-size:17px!important;line-height:1.45!important;color:#142f31!important;font-weight:700!important;margin:0 0 18px!important;overflow-wrap:anywhere!important}
+html #root#root .m117-card .m117-body p{display:block!important;color:#3e514d!important;font-size:14px!important;font-weight:400!important;line-height:1.8!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important;margin:0 0 16px!important}
+html #root#root .m117-card .m117-body p:last-child{margin-bottom:0!important}
+html #root#root .m117-card .m117-empty{font-size:14px!important;color:#6c8079!important}
+html #root#root .m117-card .m117-actions{display:flex!important;justify-content:space-between!important;align-items:center!important;flex-wrap:wrap!important;gap:12px!important;padding:14px 22px!important;margin:0!important;border-top:1px solid #e9efeb!important;background:#fff!important;border-radius:0 0 12px 12px!important}
+/* Main Messages page: retain its composer, actions, attachments and recipient activity. */
+html #root#root .w76-owner-messages .w76-thread{display:flex!important;flex-direction:column!important;gap:20px!important;padding:24px!important;background:#f8faf9!important;max-height:720px!important;overflow:auto!important;min-width:0!important}
+html #root#root .w76-owner-messages .w76-message{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:0!important;border:1px solid #dde7e2!important;border-radius:12px!important;background:#fff!important;overflow:visible!important;align-self:stretch!important}
+html #root#root .w76-owner-messages .w76-message>header{display:flex!important;flex-wrap:wrap!important;align-items:center!important;flex-direction:row!important;gap:12px!important;height:auto!important;min-height:0!important;padding:18px 22px!important;margin:0!important;background:#f6faf8!important;border-bottom:1px solid #e7eeea!important;border-radius:12px 12px 0 0!important}
+html #root#root .w76-owner-messages .w76-message .w76-avatar{width:40px!important;height:40px!important;flex:0 0 40px!important;display:grid!important;place-items:center!important;background:#e4f1eb!important;color:#00664c!important;border-radius:50%!important;font-size:13px!important;font-weight:700!important}
+html #root#root .w76-owner-messages .w76-message>header>div{min-width:0!important;flex:1!important;display:flex!important;flex-direction:column!important;gap:4px!important}
+html #root#root .w76-owner-messages .w76-message b{font-size:14px!important;color:#173a34!important;line-height:1.4!important}
+html #root#root .w76-owner-messages .w76-message small,html #root#root .w76-owner-messages .w76-message time{font-size:11px!important;line-height:1.5!important;color:#6b7d77!important;overflow-wrap:anywhere!important;white-space:normal!important}
+html #root#root .w76-owner-messages .w76-message>h4{padding:22px 22px 0!important;margin:0 0 18px!important;font-size:17px!important;line-height:1.45!important;color:#142f31!important;overflow-wrap:anywhere!important}
+html #root#root .w76-owner-messages .w76-message>.w76-preserve{display:block!important;padding:0 22px 24px!important;margin:0!important;font-size:14px!important;line-height:1.8!important;color:#3e514d!important;white-space:pre-wrap!important;overflow-wrap:anywhere!important}
+html #root#root .w76-owner-messages .w76-message>footer{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:wrap!important;gap:12px!important;padding:14px 22px!important;margin:0!important;border-top:1px solid #e7eeea!important;border-radius:0 0 12px 12px!important}
+html #root#root .w76-owner-messages .w76-message>footer .w76-actions{flex-wrap:wrap!important}
+html #root#root .m117-content a,html #root#root .w76-message a{overflow-wrap:anywhere!important}
+@media(max-width:1450px){html #root#root .o94-mail-grid{grid-template-columns:250px minmax(0,1fr)!important}}
+@media(max-width:1000px){html #root#root .p113-messages{grid-template-columns:minmax(0,1fr)!important}html #root#root .p113-compose{position:static!important}}
+@media(max-width:650px){html #root#root .o94-mail-grid{grid-template-columns:minmax(0,1fr)!important}html #root#root .o94-conversation{padding:14px!important}html #root#root .p113-conversation>.u92-thread,html #root#root .w76-owner-messages .w76-thread{padding:14px!important;gap:14px!important}html #root#root .m117-card .m117-meta,html #root#root .w76-owner-messages .w76-message>header{padding:16px!important}html #root#root .m117-card .m117-content{padding:18px 16px!important}html #root#root .m117-card time,html #root#root .w76-owner-messages .w76-message time{flex-basis:100%!important;margin-left:52px!important}html #root#root .m117-card .m117-actions{padding:12px 16px!important}html #root#root .w76-owner-messages .w76-message>h4{padding:18px 16px 0!important}html #root#root .w76-owner-messages .w76-message>.w76-preserve{padding:0 16px 20px!important}}
+}
