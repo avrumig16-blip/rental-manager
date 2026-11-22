@@ -1,8 +1,0 @@
-/* Website message layout: a docked, nonmodal composer beside the conversation. */
-(function(){'use strict';const h=React.createElement,{useRef:R,useEffect:E}=React;
-function Composer({title,onClose,children,footer,busy=false,dirty=false,className=''}){const node=R(null),latest=R({onClose,busy,dirty});latest.current={onClose,busy,dirty};async function close(){const p=latest.current;if(p.busy)return;if(p.dirty&&!await appConfirm('Discard unsaved changes?',{confirmText:'Discard changes'}))return;p.onClose()}
- E(()=>{const before=document.activeElement;node.current?.focus({preventScroll:true});const key=e=>{if(e.key==='Escape'&&node.current?.contains(document.activeElement)&&!document.querySelector('[aria-modal=true]')){e.preventDefault();close()}};document.addEventListener('keydown',key);return()=>{document.removeEventListener('keydown',key);if(before?.isConnected)before.focus({preventScroll:true})}},[]);
- return h('section',{className:'m135-composer m137-composer m138-composer '+className,ref:node,tabIndex:-1,role:'region','aria-label':title},h('header',null,h('h2',null,h(StudioIcon,{name:'edit',size:23}),title),h('button',{type:'button',disabled:busy,onClick:close,'aria-label':'Close '+title},h(StudioIcon,{name:'close',size:20}))),h('div',{className:'m138-composer-body'},children),footer&&h('footer',null,footer));}
-function Attachment({name,href,bytes}){return h('div',{className:'m138-attachment'},h('span',{className:'m138-file-icon'},h(StudioIcon,{name:'file',size:25})),h('div',null,h('b',null,name),h('small',null,'PDF'+(bytes?' · '+Math.ceil(bytes/1024)+' KB':''))),href&&h('a',{href,download:name,'aria-label':'Download '+name},h(StudioIcon,{name:'download',size:19})));}
-window.MR4UMessages138={Composer,Attachment};
-})();
