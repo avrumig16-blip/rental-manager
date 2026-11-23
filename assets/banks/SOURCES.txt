@@ -1,5 +1,0 @@
-Bank marks are used only to identify connected institutions.
-ING: https://www.vectorlogo.zone/logos/ing/ing-ar21.svg
-Crelan: https://www.crelan.be/themes/custom/calibr8_easytheme/logo.svg
-KBC: https://wcmassets.kbc.be/content/dam/kdl-assets/logos/k/logos-kbc.svg.cdn.res/last-modified/1733244069305/logos-kbc.svg
-White wordmark variants for contrast on bank-coloured cards.
