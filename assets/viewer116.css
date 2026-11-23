@@ -1,0 +1,19 @@
+/* Shared and invited views retain the management workspace typography and cards. */
+html #root#root .share-record-head{border-radius:10px!important;margin:0!important;padding:26px!important;gap:18px!important}
+html #root#root .share-icon{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;border-radius:16px!important;background:#e8f4ee!important;color:#00634b!important;flex:0 0 auto!important}
+html #root#root .share-summary{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(145px,1fr))!important;gap:14px!important;padding:22px 0!important;background:transparent!important;border:0!important}
+html #root#root .share-summary>div{background:#fff!important;border:1px solid #dce5e4!important;border-radius:9px!important;padding:18px!important;min-width:0!important}
+html #root#root .share-summary small{display:block!important;font-size:12px!important;color:#6a7f86!important;margin-bottom:8px!important}
+html #root#root .share-summary b{font-size:24px!important;letter-spacing:-.4px!important;color:#142e35!important}
+html #root#root .share-tabs{display:flex!important;gap:5px!important;overflow-x:auto!important;padding:6px!important;background:#fff!important;border:1px solid #dce5e4!important;border-radius:9px!important;margin:0 0 22px!important}
+html #root#root .share-tabs button{display:flex!important;align-items:center!important;gap:7px!important;white-space:nowrap!important;padding:12px!important;border:0!important;border-radius:6px!important;background:transparent!important;color:#657786!important}
+html #root#root .share-tabs button.active{background:#e8f4ee!important;color:#00634b!important;font-weight:700!important}
+html #root#root .share-tabs button span{font-size:10px!important;border-radius:20px!important;background:#f0f4f5!important;padding:2px 6px!important}
+html #root#root .share-section{border-radius:10px!important;padding:24px!important;min-height:220px!important}
+html #root#root .share-object-grid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))!important;gap:18px!important}
+html #root#root .share-record-item{border:1px solid #e2e9ec!important;border-radius:9px!important;background:#fff!important;padding:18px!important}
+html #root#root .share-section-empty{display:flex!important;min-height:180px!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:10px!important;color:#7c8e96!important;background:#f8fafb!important;border-radius:8px!important}
+html #root#root .share-section-empty h4,html #root#root .share-section-empty p{margin:0!important}
+html #root#root .shared-view-modal>.modal-head{padding:12px 22px!important;border-bottom:1px solid #e2e9ec!important}
+html #root#root .shared-view-modal .share-breadcrumbs{padding:12px 0!important;min-height:0!important}
+@media(max-width:650px){html #root#root .share-record-head{padding:18px!important}html #root#root .share-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important}html #root#root .share-section{padding:16px!important}}
