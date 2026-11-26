@@ -1,0 +1,18 @@
+@layer approved106 {
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-reminder{display:grid!important;gap:8px!important;padding:12px 0 4px!important;border-top:1px solid #e2ebe6!important;margin-top:10px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-reminder small{color:#63776e!important;font-size:12px!important;line-height:1.5!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p113-portal .p121-reminder-button{display:inline-flex!important;gap:8px!important;background:#edf7f1!important;color:#006549!important;border:1px solid #bcd9ca!important;padding:9px 12px!important;min-height:38px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-history{padding:16px!important;margin:10px 0!important;background:#f7faf8!important;border:1px solid #dce7e0!important;border-radius:10px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-history summary{cursor:pointer!important;font-weight:600!important;line-height:1.6!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-requested{padding:10px 12px!important;border-radius:8px!important;background:#edf7f1!important;color:#245941!important;font-size:12px!important;line-height:1.6!important}
+}
+@layer approved106 {
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-intro{padding:4px 0 20px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-intro h3{font-size:25px!important;margin:14px 0 8px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-intro p{color:#66798c!important;line-height:1.6!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin-top:18px!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-person{position:relative!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important;padding:18px!important;white-space:normal!important;text-align:left!important;border:1px solid #d9e5df!important;border-radius:12px!important;background:#fff!important;min-width:0!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-person:hover{border-color:#278769!important;background:#f1f8f4!important}
+html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-person small,html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-person>span{font-size:12px!important;color:#62758a!important;font-weight:400!important;line-height:1.5!important}
+@media(max-width:600px){html body:is(body,#root#root#root#root#root#root#root#root#root#root#root#root) .p121-picker-grid{grid-template-columns:minmax(0,1fr)!important}}
+}
